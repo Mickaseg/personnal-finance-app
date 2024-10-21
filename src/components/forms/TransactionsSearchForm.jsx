@@ -6,10 +6,10 @@ const TransactionsSearchForm = () => {
     return (
         <form className={"flex justify-evenly items-center lg:justify-between"}>
 
-            <div className={"flex border-2 border-grey300 gap-4 px-3 py-3 rounded-xl"}>
+            <div className={"flex border-2 border-grey300 px-3 py-3 rounded-xl items-center"}>
                 <label className={"hidden"}>Search transaction</label>
                 <input placeholder={"Search transactions"}></input>
-                <img alt="search icon" className={"icon w-6 h-6"} src={SearchIcon}/>
+                <img alt="search icon" className={"icon w-4 h-4"} src={SearchIcon}/>
             </div>
 
             {/*TODO : On desktop, separate inputs*/}
