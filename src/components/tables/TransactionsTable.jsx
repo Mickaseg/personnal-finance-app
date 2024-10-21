@@ -1,6 +1,6 @@
 import {useState} from 'react';
-import CaretLeft from '../assets/images/icon-caret-left.svg';
-import CaretRight from '../assets/images/icon-caret-right.svg';
+import CaretLeft from '../../assets/images/icon-caret-left.svg';
+import CaretRight from '../../assets/images/icon-caret-right.svg';
 
 const TransactionTable = () => {
     const [currentPage, setCurrentPage] = useState(2); // Starting at page 2 as shown in the image
@@ -66,7 +66,7 @@ const TransactionTable = () => {
         }
         return pages;
     };
-
+    // TODO : Select styling
     return (
         <div className="w-full mx-auto bg-white">
             {/* Mobile View (default) */}
@@ -162,7 +162,7 @@ const TransactionTable = () => {
                     onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                     disabled={currentPage === 1}
                     className="px-4 py-2 border rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-1">
-                    <img src={CaretLeft} alt=""/>
+                    <img src={CaretLeft} alt="caret left icon"/>
                     <span>Prev</span>
                 </button>
 
@@ -188,7 +188,7 @@ const TransactionTable = () => {
                     className="px-4 py-2 border rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-1"
                 >
                     <span>Next</span>
-                    <img src={CaretRight} alt=""/>
+                    <img src={CaretRight} alt="caret right icon"/>
                 </button>
             </div>
         </div>

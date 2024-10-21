@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ExpensesLegend from "./ExpensesLegend.jsx";
-import MultiSegmentDonut from "./MultiSegmentDonut.jsx";
+import ExpensesLegend from "../components/ExpensesLegend.jsx";
+import MultiSegmentDonut from "../components/MultiSegmentDonut.jsx";
 
 import CaretRight from "../assets/images/icon-caret-right.svg";
 import PotsIcon from "../assets/images/icon-pot.svg";
@@ -20,7 +20,7 @@ const Overview = () => {
         <div className={"px-4 pt-6 pb-28 min-h-screen bg-beige200 flex flex-col gap-8 md:px-10 lg:pl-72"}>
 
             <h1 className={"text-preset1 text-grey900 font-bold"}>Overview</h1>
-
+            {/*// TODO : Grid for desktop*/}
             {/*BALANCE*/}
             <section className={"flex flex-col gap-3 md:flex-row md:gap-6"}>
                 <div className={'p-5 bg-grey900 rounded-xl text-white md:w-1/3'}>

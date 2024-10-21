@@ -77,7 +77,7 @@ const MultiSegmentDonut = ({
                 </div>
 
                 <div className="mt-4 space-y-2 md:justify-self-end md:mt-0 md:col-span-2">
-                <ExpensesLegend segments={segments} style={"md:flex md:flex-col"}/>
+                <ExpensesLegend segments={segments} style={"md:flex md:flex-colvh"}/>
                 </div>
 
             </CardContent>

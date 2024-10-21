@@ -2,8 +2,8 @@ import React from 'react';
 
 import SearchIcon from '../assets/images/icon-search.svg';
 import SortIcon from '../assets/images/icon-sort-mobile.svg';
-import TransactionsSearchForm from "./forms/TransactionsSearchForm.jsx";
-import TransactionsTable from "./TransactionsTable.jsx";
+import TransactionsSearchForm from "../components/forms/TransactionsSearchForm.jsx";
+import TransactionsTable from "../components/tables/TransactionsTable.jsx";
 
 const Transactions = () => {
     return (
