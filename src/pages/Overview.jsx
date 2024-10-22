@@ -37,7 +37,7 @@ const Overview = () => {
                 </div>
             </section>
 
-            <div className={"flex flex-col gap-8 "}>
+            <div className={"flex flex-col gap-8"}>
                 {/*POTS*/}
                 <section className={"py-6 px-5 bg-white rounded-xl flex flex-col gap-5 md:p-8"}>
 

@@ -15,6 +15,7 @@ const Pots = () => {
                 </button>
             </div>
 
+            {/*SAVINGS*/}
             <div className={"flex flex-col gap-6 lg:grid lg:grid-cols-2"}>
             <SavingsCard savedAmount={savedAmount} targetAmount={targetAmount} barColor={"bg-red"}/>
             <SavingsCard savedAmount={savedAmount} targetAmount={targetAmount} barColor={"bg-red"}/>

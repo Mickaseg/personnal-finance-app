@@ -26,8 +26,9 @@ const RecurringBills = () => {
 
             <h1 className={"text-preset1 text-grey900 font-bold pb-8"}>Reccuring Bills</h1>
 
+            <div className={"lg:grid lg:grid-cols-12 lg:gap-6"}>
             {/*TOTAL BILLS*/}
-            <div className={"flex flex-col gap-3 pb-6 md:flex-row"}>
+            <div className={"flex flex-col gap-3 pb-6 md:flex-row lg:col-span-4 lg:flex-col"}>
             <section className={"w-full bg-grey900 p-6 text-white rounded-xl flex gap-5 items-center md:flex-col md:items-start md:justify-evenly"}>
                 <img src={BillsIcon} alt="" className={"text-white w-10 h-10"}/>
                 <div>
@@ -66,10 +67,11 @@ const RecurringBills = () => {
             </div>
 
             {/*BILLS TABLE*/}
-            <section className={"bg-white rounded-xl p-5"}>
+            <section className={"bg-white rounded-xl p-5 lg:col-span-8"}>
                 <BillsSearchForm/>
                 <RecurringBillsTable/>
             </section>
+            </div>
 
         </div>
     );
