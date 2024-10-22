@@ -18,49 +18,36 @@ const Navbar = () => {
         setExpanded(!expanded);
     }
 
-    return (
-        <nav
+    return (<nav
             className={`z-10 bg-grey900 fixed bottom-0 w-screen pt-4 rounded-t-lg  lg:h-screen ${expanded ? "lg:w-64" : "lg:w-24"} transition-all`}>
             <div className={"flex justify-start lg:p-8"}>
-                {expanded ?
-                    <img src={LogoLarge} className={"h-6 hidden lg:block w-24"} alt=""/> :
-                    <img src={LogoSmall} className={"w-6 h-6 hidden lg:flex lg:justify-center"} alt=""/>
-                }
+                {expanded ? <img src={LogoLarge} className={"h-6 hidden lg:block w-24"} alt=""/> :
+                    <img src={LogoSmall} className={"w-6 h-6 hidden lg:flex lg:justify-center"} alt=""/>}
             </div>
             <ul className={"flex justify-evenly lg:flex-col lg:pr-6 lg:gap-4"}>
-                <li >
+                <li>
                     <NavLink to={"/"}
                              className="text-grey300 font-bold text-center text-preset5 flex flex-col items-center pt-2 pb-3 px-6 rounded-t-lg border-b-8 border-grey900 active:bg-white active:text-grey900 active:border-green lg:flex-row lg:text-preset3 lg:gap-4 lg:px-0 lg:pl-7 lg:border-b-0 lg:border-l-4 lg:rounded-tl-none lg:rounded-r-lg">
                         <img src={OverviewIcon} alt='#' className="icon w-6 h-6"/>
                         <span className={"hidden md:block lg:hidden"}>Overview</span>
-                        {expanded ?
-                            <span className={"hidden md:block"}>Overview</span>
-                            : null
-                        }
+                        {expanded ? <span className={"hidden lg:block"}>Overview</span> : null}
                     </NavLink>
                 </li>
                 <li>
-                <NavLink to={"/transactions"}
+                    <NavLink to={"/transactions"}
                              className="text-grey300 font-bold text-center text-preset5 flex flex-col items-center pt-2 pb-3 px-6 rounded-t-lg border-b-8 border-grey900 active:bg-white active:text-grey900 active:border-green lg:flex-row lg:text-preset3 lg:gap-4 lg:px-0 lg:pl-7 lg:border-b-0 lg:border-l-4 lg:rounded-tl-none lg:rounded-r-lg">
                         <img src={TransactionsIcon} alt='#' className="icon"/>
                         <span className={"hidden md:block lg:hidden"}>Transactions</span>
-
-                        {expanded ?
-                            <span className={"hidden md:block"}>Transactions</span>
-                            : null
-                        }
+                        {expanded ? <span className={"hidden lg:block"}>Transactions</span> : null}
                     </NavLink>
                 </li>
                 <li>
-                <NavLink to={"/budgets"}
+                    <NavLink to={"/budgets"}
                              className="text-grey300 font-bold text-center text-preset5 flex flex-col items-center pt-2 pb-3 px-6 rounded-t-lg border-b-8 border-grey900 active:bg-white active:text-grey900 active:border-green lg:flex-row lg:text-preset3 lg:gap-4 lg:px-0 lg:pl-7 lg:border-b-0 lg:border-l-4 lg:rounded-tl-none lg:rounded-r-lg">
                         <img src={BudgetsIcon} alt='#' className="icon"/>
                         <span className={"hidden md:block lg:hidden"}>Budgets</span>
 
-                        {expanded ?
-                            <span className={"hidden md:block"}>Budgets</span>
-                            : null
-                        }
+                        {expanded ? <span className={"hidden lg:block"}>Budgets</span> : null}
 
                     </NavLink>
                 </li>
@@ -70,10 +57,7 @@ const Navbar = () => {
                         <img src={PotsIcon} alt='#' className="icon"/>
                         <span className={"hidden md:block lg:hidden"}>Pots</span>
 
-                        {expanded ?
-                            <span className={"hidden md:block"}>Pots</span>
-                            : null
-                        }
+                        {expanded ? <span className={"hidden lg:block"}>Pots</span> : null}
                     </NavLink>
                 </li>
                 <li>
@@ -82,23 +66,16 @@ const Navbar = () => {
 
                         <img src={RecurringBillsIcon} alt='#' className="icon"/>
                         <span className={"hidden md:block lg:hidden"}>Recurring Bills</span>
-                        {expanded ?
-                            <span className={"hidden md:block"}>Recurring Bills</span>
-                            : null
-                        }
+                        {expanded ? <span className={"hidden lg:block"}>Recurring Bills</span> : null}
                     </NavLink>
                 </li>
             </ul>
 
             <button className={"hidden lg:flex lg:pl-8 lg:pt-32 lg:gap-4 lg:items-center"} onClick={handleMinimize}>
                 <img src={MinimizeIcon} className={`${expanded ? null : "rotate-180"}`} alt=""/>
-                {expanded ?
-                    <p className={"text-grey300 font-bold whitespace-nowrap"}>Minimize Menu</p> :
-                    null
-                }
+                {expanded ? <p className={"text-grey300 font-bold whitespace-nowrap"}>Minimize Menu</p> : null}
             </button>
-        </nav>
-    );
+        </nav>);
 };
 
 export default Navbar;
