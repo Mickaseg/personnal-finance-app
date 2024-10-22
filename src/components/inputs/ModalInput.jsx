@@ -1,4 +1,4 @@
-import React from 'react';
+import AlertIcon from "../../assets/images/icon-bill-due.svg";
 
 const ModalInput = ({
                         label,
@@ -6,7 +6,8 @@ const ModalInput = ({
                         className = "",
                         characterLimit = null,
                         value,
-                        onChange
+                        onChange,
+                        type= "text"
                     }) => {
 
     const remainingChars = characterLimit ? characterLimit - (value?.length || 0) : null;
@@ -21,18 +22,20 @@ const ModalInput = ({
 
             <input
                 value={value}
+                type={type}
                 onChange={onChange}
                 placeholder={placeholder}
                 maxLength={characterLimit}
                 className={`border-2 border-grey300 gap-4 px-3 py-3 rounded-xl ${className}`}
             />
 
-            {characterLimit && (
-                <p className={"text-right text-preset5 text-grey500"}>
+            {characterLimit && type === "text" &&  (
+                <p className={`text-preset5 ${remainingChars > 0  ? "text-grey500" : "text-red"} flex justify-end gap-2`}>
+                    {remainingChars <= 0  ? <img src={AlertIcon} alt={""}/> : null}
                     {remainingChars} characters left
                 </p>
             )}
-            
+
         </div>
 
     );
