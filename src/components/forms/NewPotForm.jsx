@@ -3,10 +3,12 @@ import {useState} from "react";
 import ModalSelect from "@/components/inputs/ModalSelect.jsx";
 import ModalInput from "@/components/inputs/ModalInput.jsx";
 
-const NewBudgetForm = () => {
-    const [potName, setPotValue] = useState("");
-    const [targetValue, setTargetValue] = useState(0);
-
+const NewPotForm = ({initialData}) => {
+    const [formData, setFormData] = useState({
+        name: initialData?.name || '',
+        target: initialData?.target || '',
+        // ... other fields
+    });
     return (
         <form className={"flex flex-col gap-4"}>
 
@@ -14,16 +16,22 @@ const NewBudgetForm = () => {
                 label={"Pot Name"}
                 placeholder={"Travel to Germany"}
                 characterLimit={30}
-                value={potName}
-                onChange={(e) => setPotValue(e.target.value)}
+                value={formData.name}
+                onChange={(e) => setFormData(prev => ({
+                    ...prev,
+                    name: e.target.value
+                }))}
             />
 
             <ModalInput
                 label={"Target"}
                 placeholder={"$"}
-                value={targetValue}
-                type={"number"}
-                onChange={(e) => setTargetValue(e.target.value)}
+
+                value={formData.target}
+                onChange={(e) => setFormData(prev => ({
+                    ...prev,
+                    target: e.target.value
+                }))}
             />
 
             <ModalSelect
@@ -35,4 +43,4 @@ const NewBudgetForm = () => {
     );
 };
 
-export default NewBudgetForm;
+export default NewPotForm;
