@@ -1,13 +1,13 @@
-import React from 'react';
-import TransactionsSearchForm from "../components/forms/TransactionsSearchForm.jsx";
-import TransactionsTable from "../components/tables/TransactionsTable.jsx";
-import {Card, CardContent} from "../components/ui/card.tsx";
-import ExpensesLegend from "@/components/cards/ExpensesLegend.jsx";
+import {useState} from 'react';
+
 import SpendingTracker from "../components/cards/SpendingTracker.jsx";
 import MultiSegmentDonutBudgets from "../components/donuts/MultiSegmentDonutBudgets.jsx";
+import Modal from "../components/modals/Modal.jsx";
+import NewBudgetForm from "@/components/forms/NewBudgetForm.jsx";
 
 
 const Budgets = () => {
+    const [isOpen, setIsOpen] = useState(false);
 
     const spendingLimit = 50.00;
     const currentSpent = 18.00;
@@ -20,14 +20,28 @@ const Budgets = () => {
 
     return (
 
-        <div
-            className={"px-4 pt-6 pb-28 min-h-screen bg-beige200 flex flex-col gap-8 md:px-10 lg:pl-72"}>
+        <div className={"px-4 pt-6 pb-28 min-h-screen bg-beige200 flex flex-col gap-8 md:px-10 lg:pl-72"}>
 
             <div className={"flex justify-between"}>
                 <h1 className={"text-preset1 text-grey900 font-bold"}>Budgets</h1>
-                <button className={"text-preset4 font-bold p-4 bg-grey900 text-white rounded-xl"}>
+                <button className={"text-preset4 font-bold p-4 bg-grey900 text-white rounded-xl"} onClick={() => setIsOpen(true)}>
                     + Add New Budget
                 </button>
+                <Modal
+                    isOpen={isOpen}
+                    onClose={() => setIsOpen(false)}
+                    title="Add New Budget"
+                    description="Lorem ipsum dolor sit amet, consectetur adipiscing elit Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+                    footer={
+                        <div className={"w-full flex justify-center"}>
+                            <button className={" w-full bg-grey900 text-white py-4 rounded-xl text-preset4 font-bold"} onClick={() => setIsOpen(false)}>
+                                Add Budget
+                            </button>
+                        </div>
+                    }
+                >
+                    <NewBudgetForm/>
+                </Modal>
             </div>
 
             <section className={"flex flex-col lg:grid lg:grid-cols-12 gap-6"}>

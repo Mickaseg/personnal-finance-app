@@ -57,7 +57,7 @@ const RecurringBills = () => {
 
                     <div className="flex justify-between items-center pt-4">
                         <span className="text-red text-preset5">Due Soon</span>
-                        <span className="text-red font-bold">
+                        <span className="text-red font-bold text-preset5">
               {summaryData.dueSoon.count} (${summaryData.dueSoon.amount.toFixed(2)})
             </span>
                     </div>
