@@ -1,11 +1,12 @@
 import './App.css'
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
-import Navbar from './components/Navbar'
+import Navbar from './components/nav/Navbar'
 import Overview from './pages/Overview'
 import Transactions from './pages/Transactions'
 import Budgets from './pages/Budgets'
-
+import Pots from './pages/Pots'
+import RecurringBills from './pages/RecurringBills'
 
 function App() {
     return (
@@ -16,6 +17,8 @@ function App() {
                 <Route path="/" element={<Overview />} />
                 <Route path="transactions" element={<Transactions />} />
                 <Route path="budgets" element={<Budgets />} />
+                <Route path="pots" element={<Pots />} />
+                <Route path="recurring-bills" element={<RecurringBills />} />
             </Routes>
             </Router>
         </>

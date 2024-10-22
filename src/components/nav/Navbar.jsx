@@ -1,14 +1,15 @@
 import {useState} from 'react';
-import LogoSmall from '../assets/images/logo-small.svg';
-import LogoLarge from '../assets/images/logo-large.svg';
-
-import OverviewIcon from '../assets/images/icon-nav-overview.svg';
-import TransactionsIcon from '../assets/images/icon-nav-transactions.svg';
-import BudgetsIcon from '../assets/images/icon-nav-budgets.svg';
-import PotsIcon from '../assets/images/icon-nav-pots.svg';
-import RecurringBillsIcon from '../assets/images/icon-nav-recurring-bills.svg';
-import MinimizeIcon from '../assets/images/icon-minimize-menu.svg';
 import {NavLink} from "react-router-dom";
+
+import LogoSmall from '../../assets/images/logo-small.svg';
+import LogoLarge from '../../assets/images/logo-large.svg';
+
+import OverviewIcon from '../../assets/images/icon-nav-overview.svg';
+import TransactionsIcon from '../../assets/images/icon-nav-transactions.svg';
+import BudgetsIcon from '../../assets/images/icon-nav-budgets.svg';
+import PotsIcon from '../../assets/images/icon-nav-pots.svg';
+import RecurringBillsIcon from '../../assets/images/icon-nav-recurring-bills.svg';
+import MinimizeIcon from '../../assets/images/icon-minimize-menu.svg';
 
 const Navbar = () => {
     const [expanded, setExpanded] = useState(false);
@@ -31,6 +32,7 @@ const Navbar = () => {
                     <NavLink to={"/"}
                              className="text-grey300 font-bold text-center text-preset5 flex flex-col items-center pt-2 pb-3 px-6 rounded-t-lg border-b-8 border-grey900 active:bg-white active:text-grey900 active:border-green lg:flex-row lg:text-preset3 lg:gap-4 lg:px-0 lg:pl-7 lg:border-b-0 lg:border-l-4 lg:rounded-tl-none lg:rounded-r-lg">
                         <img src={OverviewIcon} alt='#' className="icon w-6 h-6"/>
+                        <span className={"hidden md:block lg:hidden"}>Overview</span>
                         {expanded ?
                             <span className={"hidden md:block"}>Overview</span>
                             : null
@@ -38,9 +40,10 @@ const Navbar = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to={"/transactions"}
+                <NavLink to={"/transactions"}
                              className="text-grey300 font-bold text-center text-preset5 flex flex-col items-center pt-2 pb-3 px-6 rounded-t-lg border-b-8 border-grey900 active:bg-white active:text-grey900 active:border-green lg:flex-row lg:text-preset3 lg:gap-4 lg:px-0 lg:pl-7 lg:border-b-0 lg:border-l-4 lg:rounded-tl-none lg:rounded-r-lg">
                         <img src={TransactionsIcon} alt='#' className="icon"/>
+                        <span className={"hidden md:block lg:hidden"}>Transactions</span>
 
                         {expanded ?
                             <span className={"hidden md:block"}>Transactions</span>
@@ -49,29 +52,41 @@ const Navbar = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to={"/budgets"}
+                <NavLink to={"/budgets"}
                              className="text-grey300 font-bold text-center text-preset5 flex flex-col items-center pt-2 pb-3 px-6 rounded-t-lg border-b-8 border-grey900 active:bg-white active:text-grey900 active:border-green lg:flex-row lg:text-preset3 lg:gap-4 lg:px-0 lg:pl-7 lg:border-b-0 lg:border-l-4 lg:rounded-tl-none lg:rounded-r-lg">
                         <img src={BudgetsIcon} alt='#' className="icon"/>
+                        <span className={"hidden md:block lg:hidden"}>Budgets</span>
 
                         {expanded ?
                             <span className={"hidden md:block"}>Budgets</span>
                             : null
                         }
+
                     </NavLink>
                 </li>
-                <li className="text-grey300 font-bold text-center text-preset5 flex flex-col items-center pt-2 pb-3 px-6 rounded-t-lg border-b-8 border-grey900 active:bg-white active:text-grey900 active:border-green lg:flex-row lg:text-preset3 lg:gap-4 lg:px-0 lg:pl-7 lg:border-b-0 lg:border-l-4 lg:rounded-tl-none lg:rounded-r-lg">
-                    <img src={PotsIcon} alt='#' className="icon"/>
-                    {expanded ?
-                        <span className={"hidden md:block"}>Pots</span>
-                        : null
-                    }
+                <li>
+                    <NavLink to={"/pots"}
+                             className="text-grey300 font-bold text-center text-preset5 flex flex-col items-center pt-2 pb-3 px-6 rounded-t-lg border-b-8 border-grey900 active:bg-white active:text-grey900 active:border-green lg:flex-row lg:text-preset3 lg:gap-4 lg:px-0 lg:pl-7 lg:border-b-0 lg:border-l-4 lg:rounded-tl-none lg:rounded-r-lg">
+                        <img src={PotsIcon} alt='#' className="icon"/>
+                        <span className={"hidden md:block lg:hidden"}>Pots</span>
+
+                        {expanded ?
+                            <span className={"hidden md:block"}>Pots</span>
+                            : null
+                        }
+                    </NavLink>
                 </li>
-                <li className="text-grey300 font-bold text-center text-preset5 flex flex-col items-center pt-2 pb-3 px-6 rounded-t-lg border-b-8 border-grey900 active:bg-white active:text-grey900 active:border-green lg:flex-row lg:text-preset3 lg:gap-4 lg:px-0 lg:pl-7 lg:border-b-0 lg:border-l-4 lg:rounded-tl-none lg:rounded-r-lg">
-                    <img src={RecurringBillsIcon} alt='#' className="icon"/>
-                    {expanded ?
-                        <span className={"hidden md:block whitespace-nowrap"}>Recurring Bills</span>
-                        : null
-                    }
+                <li>
+                    <NavLink to={"/recurring-bills"}
+                             className="text-grey300 font-bold text-center text-preset5 flex flex-col items-center pt-2 pb-3 px-6 rounded-t-lg border-b-8 border-grey900 active:bg-white active:text-grey900 active:border-green lg:flex-row lg:text-preset3 lg:gap-4 lg:px-0 lg:pl-7 lg:border-b-0 lg:border-l-4 lg:rounded-tl-none lg:rounded-r-lg">
+
+                        <img src={RecurringBillsIcon} alt='#' className="icon"/>
+                        <span className={"hidden md:block lg:hidden"}>Recurring Bills</span>
+                        {expanded ?
+                            <span className={"hidden md:block"}>Recurring Bills</span>
+                            : null
+                        }
+                    </NavLink>
                 </li>
             </ul>
 

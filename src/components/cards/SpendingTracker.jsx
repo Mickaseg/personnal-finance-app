@@ -1,8 +1,8 @@
 import React from 'react';
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import {Progress} from "@/components/ui/progress";
-import CaretRight from "../assets/images/icon-caret-right.svg";
-import Ellipsis from"../assets/images/icon-ellipsis.svg";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {Progress} from "@/components/ui/progress.tsx";
+import CaretRight from "../../assets/images/icon-caret-right.svg";
+import Ellipsis from "../../assets/images/icon-ellipsis.svg";
 
 const SpendingTracker = ({spendingLimit, currentSpent, transactions, barColor}) => {
 

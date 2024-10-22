@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ExpensesLegend from "../components/ExpensesLegend.jsx";
-import MultiSegmentDonut from "../components/MultiSegmentDonut.jsx";
+import ExpensesLegend from "../components/cards/ExpensesLegend.jsx";
+import MultiSegmentDonut from "../components/donuts/MultiSegmentDonut.jsx";
 
 import CaretRight from "../assets/images/icon-caret-right.svg";
 import PotsIcon from "../assets/images/icon-pot.svg";

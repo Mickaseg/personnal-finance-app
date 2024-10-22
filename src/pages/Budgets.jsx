@@ -2,9 +2,9 @@ import React from 'react';
 import TransactionsSearchForm from "../components/forms/TransactionsSearchForm.jsx";
 import TransactionsTable from "../components/tables/TransactionsTable.jsx";
 import {Card, CardContent} from "../components/ui/card.tsx";
-import ExpensesLegend from "@/components/ExpensesLegend.jsx";
-import SpendingTracker from "../components/SpendingTracker.jsx";
-import MultiSegmentDonutBudgets from "../components/MultiSegmentDonutBudgets.jsx";
+import ExpensesLegend from "@/components/cards/ExpensesLegend.jsx";
+import SpendingTracker from "../components/cards/SpendingTracker.jsx";
+import MultiSegmentDonutBudgets from "../components/donuts/MultiSegmentDonutBudgets.jsx";
 
 
 const Budgets = () => {
@@ -44,7 +44,7 @@ const Budgets = () => {
                     <SpendingTracker spendingLimit={spendingLimit} currentSpent={currentSpent}
                                      transactions={transactions} barColor={"bg-yellow"}/>
                 </div>
-                
+
             </section>
 
 

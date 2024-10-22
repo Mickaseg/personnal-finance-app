@@ -1,6 +1,6 @@
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import ExpensesLegend from "@/components/ExpensesLegend.jsx";
+import {Card, CardContent} from "@/components/ui/card.tsx";
+import ExpensesLegend from "../cards/ExpensesLegend";
 
 const MultiSegmentDonut = ({
                                segments = [
@@ -77,7 +77,7 @@ const MultiSegmentDonut = ({
                 </div>
 
                 <div className="mt-4 space-y-2 md:justify-self-end md:mt-0 md:col-span-2">
-                <ExpensesLegend segments={segments} style={"md:flex md:flex-colvh"}/>
+                <ExpensesLegend segments={segments} style={"md:flex md:flex-col"}/>
                 </div>
 
             </CardContent>
