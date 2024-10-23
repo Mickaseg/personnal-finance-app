@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+
 import NewBudgetForm from "@/components/forms/NewBudgetForm.jsx";
 import Modal from "@/components/modals/Modal.jsx";
+
 
 const BudgetsModal = ({ isOpen, setIsOpen, initialData = null }) => {
 

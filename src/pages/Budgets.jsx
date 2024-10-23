@@ -4,7 +4,7 @@ import MultiSegmentDonutBudgets from "../components/donuts/MultiSegmentDonutBudg
 import BudgetsModal from "../components/modals/BudgetsModal.jsx";
 
 const Budgets = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenEdit, setIsOpenEdit] = useState(false);
     const [editingBudget, setEditingBudget] = useState(null);
 
     const mockData = [
@@ -48,12 +48,12 @@ const Budgets = () => {
             <div className={"flex justify-between"}>
                 <h1 className={"text-preset1 text-grey900 font-bold"}>Budgets</h1>
                 <button className={"text-preset4 font-bold p-4 bg-grey900 text-white rounded-xl"} onClick={() => {
-                    setIsOpen(true);
+                    setIsOpenEdit(true);
                     setEditingBudget(null);
                 }}>
                     + Add New Budget
                 </button>
-                <BudgetsModal isOpen={isOpen} setIsOpen={setIsOpen} initialData={editingBudget} />
+                <BudgetsModal isOpen={isOpenEdit} setIsOpen={setIsOpenEdit} initialData={editingBudget} />
             </div>
 
             <section className={"flex flex-col lg:grid lg:grid-cols-12 gap-6"}>
@@ -71,7 +71,7 @@ const Budgets = () => {
                         transactions={budget.transactions}
                         barColor={budget.barColor}
                         setEditingBudget={setEditingBudget}
-                        setIsOpen={setIsOpen}
+                        setIsOpenEdit={setIsOpenEdit}
                     />
                     )}
                 </div>

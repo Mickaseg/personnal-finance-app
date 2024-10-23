@@ -5,7 +5,7 @@ import NewPotForm from "@/components/forms/NewPotForm.jsx";
 import PotsModal from "@/components/modals/PotsModal.jsx";
 
 const Pots = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpenEdit, setIsOpenEdit] = useState(false);
     const [editingPot, setEditingPot] = useState(null);
 
     const mockData = [
@@ -21,13 +21,13 @@ const Pots = () => {
             <div className={"flex justify-between"}>
                 <h1 className={"text-preset1 text-grey900 font-bold"}>Pots</h1>
                 <button onClick={() => {
-                    setIsOpen(true);
+                    setIsOpenEdit(true);
                     setEditingPot(null)
                 }}
                         className={"text-preset4 font-bold p-4 bg-grey900 text-white rounded-xl"}>
                     + Add New Pot
                 </button>
-                <PotsModal isOpen={isOpen} setIsOpen={setIsOpen} initialData={editingPot}/>
+                <PotsModal isOpen={isOpenEdit} setIsOpen={setIsOpenEdit} initialData={editingPot}/>
             </div>
 
             {/*SAVINGS*/}
@@ -38,7 +38,7 @@ const Pots = () => {
                         potData={pot}
                         barColor={pot.barColor}
                         setEditingPot={setEditingPot}
-                        setIsOpen={setIsOpen}
+                        setIsOpen={setIsOpenEdit}
                     />
                 ))}
             </div>

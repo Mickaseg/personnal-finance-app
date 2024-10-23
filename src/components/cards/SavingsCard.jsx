@@ -1,9 +1,34 @@
+import React, {useState} from "react";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {Progress} from "@/components/ui/progress.tsx";
-
 import Ellipsis from "../../assets/images/icon-ellipsis.svg";
+import ActionDropdown from "@/components/nav/ActionDropdown.jsx";
+import DeleteModal from "@/components/modals/DeleteModal.jsx";
+
 
 const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
+    const [isOpenDelete, setIsOpenDelete] = useState(false);
+    const handleEdit = () => {
+        setEditingPot(potData);
+        setIsOpen(true);
+    };
+
+    const handleDelete = () => {
+        setIsOpenDelete(true);
+    };
+
+    const menuItems = [
+        {
+            label: "Edit Pot",
+            onClick: handleEdit,
+        },
+        {
+            label: "Delete Pot",
+            onClick: handleDelete,
+            className: "text-red-600",
+        },
+    ];
+
 
     const {id, name, savedAmount, targetAmount, barColor} = potData;
     const progressPercentage = (savedAmount / targetAmount) * 100;
@@ -16,12 +41,14 @@ const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
                         <div className={`w-3 h-3 rounded-full ${barColor}`}></div>
                         {name}
                     </div>
-                    <button onClick={() => {
-                        setEditingPot({ id, name, savedAmount, targetAmount });
-                        setIsOpen(true);
-                    }}>
-                        <img src={Ellipsis} alt="Options"/>
-                    </button>
+                    <ActionDropdown items={menuItems}>
+                        <button>
+                            <img src={Ellipsis} alt="Ellipsis" />
+                        </button>
+                    </ActionDropdown>
+
+                    <DeleteModal isOpen={isOpenDelete} setIsOpen={setIsOpenDelete} element={name}/>
+
                 </CardTitle>
             </CardHeader>
 
