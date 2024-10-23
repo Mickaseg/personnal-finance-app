@@ -4,7 +4,7 @@ import {Progress} from "@/components/ui/progress.tsx";
 import CaretRight from "../../assets/images/icon-caret-right.svg";
 import Ellipsis from "../../assets/images/icon-ellipsis.svg";
 
-const SpendingTracker = ({spendingLimit, currentSpent, transactions, barColor}) => {
+const SpendingTracker = ({id,name,spendingLimit, currentSpent, transactions, barColor, setEditingBudget , setIsOpen}) => {
 
     return (
         <Card className="w-full shadow-none border-none">
@@ -12,9 +12,14 @@ const SpendingTracker = ({spendingLimit, currentSpent, transactions, barColor}) 
                 <CardTitle className="text-md flex items-center justify-between">
                     <div className="flex items-center gap-2 text-preset2">
                         <div className="w-4 h-4 rounded-full bg-teal-500"></div>
-                        Entertainment
+                        {name}
                     </div>
-                    <img src={Ellipsis} alt="Ellipsis"/>
+                    <button onClick={() => {
+                        setEditingBudget({id, name, spendingLimit});
+                        setIsOpen(true);
+                    }}>
+                        <img src={Ellipsis} alt="Ellipsis"/>
+                    </button>
                 </CardTitle>
                 <div className="text-gray-500 text-preset4">Maximum of ${spendingLimit.toFixed(2)}</div>
             </CardHeader>

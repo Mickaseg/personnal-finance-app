@@ -27,7 +27,7 @@ const Pots = () => {
                         className={"text-preset4 font-bold p-4 bg-grey900 text-white rounded-xl"}>
                     + Add New Pot
                 </button>
-                <PotsModal isOpen={isOpen} setIsOpen={setIsOpen} editingPot={editingPot}/>
+                <PotsModal isOpen={isOpen} setIsOpen={setIsOpen} initialData={editingPot}/>
             </div>
 
             {/*SAVINGS*/}

@@ -1,10 +1,11 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card.tsx";
-import { Progress } from "@/components/ui/progress.tsx";
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card.tsx";
+import {Progress} from "@/components/ui/progress.tsx";
 
 import Ellipsis from "../../assets/images/icon-ellipsis.svg";
 
-const SavingsCard = ({ potData, setEditingPot, setIsOpen }) => {
-    const { name, savedAmount, targetAmount, barColor } = potData;
+const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
+
+    const {id, name, savedAmount, targetAmount, barColor} = potData;
     const progressPercentage = (savedAmount / targetAmount) * 100;
 
     return (
@@ -16,10 +17,10 @@ const SavingsCard = ({ potData, setEditingPot, setIsOpen }) => {
                         {name}
                     </div>
                     <button onClick={() => {
-                        setEditingPot({ name, target: targetAmount });
+                        setEditingPot({ id, name, savedAmount, targetAmount });
                         setIsOpen(true);
                     }}>
-                        <img src={Ellipsis} alt="Options" />
+                        <img src={Ellipsis} alt="Options"/>
                     </button>
                 </CardTitle>
             </CardHeader>
