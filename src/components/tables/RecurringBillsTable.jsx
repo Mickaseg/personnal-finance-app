@@ -1,45 +1,8 @@
 import OverdueIcon from "../../assets/images/icon-bill-due.svg";
 import PaidIcon from "../../assets/images/icon-bill-paid.svg";
 
-const RecurringBillsTable = () => {
-    const bills = [
-        {
-            id: 1,
-            name: 'Elevate Education',
-            amount: 250.00,
-            schedule: 'Monthly-1st',
-            status: 'paid',
-            color: 'bg-emerald-500'
-        },
-        {id: 2, name: 'Bravo Zen Spa', amount: 70.00, schedule: 'Monthly-3rd', status: 'normal', color: 'bg-orange'},
-        {
-            id: 3,
-            name: 'Charlie Electric Company',
-            amount: 10.00,
-            schedule: 'Monthly-5th',
-            status: 'overdue',
-            color: 'bg-red'
-        },
-        {id: 4, name: 'Delta Taxi', amount: 30.00, schedule: 'Monthly-6th', status: 'overdue', color: 'bg-blue'},
-        {id: 5, name: 'Echo Game Store', amount: 5.00, schedule: 'Monthly-12th', status: 'normal', color: 'bg-purple'},
-        {id: 6, name: 'Echo Game Store', amount: 10.00, schedule: 'Monthly-16th', status: 'normal', color: 'bg-purple'},
-        {
-            id: 7,
-            name: 'Tango Gas Company',
-            amount: 225.00,
-            schedule: 'Monthly-22nd',
-            status: 'paid',
-            color: 'bg-teal-500'
-        },
-        {
-            id: 8,
-            name: 'Juliet Restaurant',
-            amount: 950.00,
-            schedule: 'Monthly-28th',
-            status: 'normal',
-            color: 'bg-amber-700'
-        }
-    ];
+const RecurringBillsTable = ({bills}) => {
+
     return (
         <div className="w-full mx-auto bg-white pt-6">
 

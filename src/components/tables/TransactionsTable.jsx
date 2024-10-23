@@ -3,8 +3,8 @@ import CaretLeft from '../../assets/images/icon-caret-left.svg';
 import CaretRight from '../../assets/images/icon-caret-right.svg';
 
 const TransactionTable = () => {
-    const [currentPage, setCurrentPage] = useState(2); // Starting at page 2 as shown in the image
-    const itemsPerPage = 3;
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
     const transactions = [
         {
             id: 1,

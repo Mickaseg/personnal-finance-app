@@ -16,7 +16,7 @@ const Pots = () => {
     ];
 
     return (
-        <div className={"px-4 pt-6 pb-28 min-h-screen bg-beige200 flex flex-col gap-8 md:px-10 lg:pl-72"}>
+        <div className={"px-4 pt-6 pb-28 min-h-screen bg-beige200 flex flex-col gap-8 md:px-10 lg:pl-72 lg:pb-0"}>
 
             <div className={"flex justify-between"}>
                 <h1 className={"text-preset1 text-grey900 font-bold"}>Pots</h1>

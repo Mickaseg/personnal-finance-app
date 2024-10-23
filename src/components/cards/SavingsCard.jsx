@@ -4,10 +4,17 @@ import {Progress} from "@/components/ui/progress.tsx";
 import Ellipsis from "../../assets/images/icon-ellipsis.svg";
 import ActionDropdown from "@/components/nav/ActionDropdown.jsx";
 import DeleteModal from "@/components/modals/DeleteModal.jsx";
+import SavingsDialog from "@/components/modals/SavingsDialog.jsx";
 
 
 const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
     const [isOpenDelete, setIsOpenDelete] = useState(false);
+    const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
+    const [isAddOpen, setIsAddOpen] = useState(false);
+
+    const {id, name, savedAmount, targetAmount, barColor} = potData;
+    const progressPercentage = (savedAmount / targetAmount) * 100;
+
     const handleEdit = () => {
         setEditingPot(potData);
         setIsOpen(true);
@@ -30,9 +37,6 @@ const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
     ];
 
 
-    const {id, name, savedAmount, targetAmount, barColor} = potData;
-    const progressPercentage = (savedAmount / targetAmount) * 100;
-
     return (
         <Card className="w-full bg-white">
             <CardHeader className="space-y-1">
@@ -43,7 +47,7 @@ const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
                     </div>
                     <ActionDropdown items={menuItems}>
                         <button>
-                            <img src={Ellipsis} alt="Ellipsis" />
+                            <img src={Ellipsis} alt="Ellipsis"/>
                         </button>
                     </ActionDropdown>
 
@@ -74,6 +78,7 @@ const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
                         border border-gray-100
                         transition-colors duration-200
                         focus:outline-none focus:ring-2 focus:ring-gray-200"
+                        onClick={() => setIsAddOpen(true)}
                     >
                         + Add Money
                     </button>
@@ -83,10 +88,36 @@ const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
                         border border-gray-100
                         transition-colors duration-200
                         focus:outline-none focus:ring-2 focus:ring-gray-200"
+                        onClick={() => setIsWithdrawOpen(true)}
                     >
                         Withdraw
                     </button>
                 </div>
+
+                <SavingsDialog
+                    isOpen={isWithdrawOpen}
+                    onClose={() => setIsWithdrawOpen(false)}
+                    title={name}
+                    currentAmount={savedAmount}
+                    targetAmount={targetAmount}
+                    percentage={progressPercentage}
+                    type="withdraw"
+                    onConfirm={(amount) => handleWithdraw(amount)}
+                    barColor={barColor}
+                />
+
+                <SavingsDialog
+                    isOpen={isAddOpen}
+                    onClose={() => setIsAddOpen(false)}
+                    title={name}
+                    currentAmount={savedAmount}
+                    targetAmount={targetAmount}
+                    percentage={progressPercentage}
+                    type="add"
+                    onConfirm={(amount) => handleAdd(amount)}
+                    barColor={barColor}
+                />
+
             </CardContent>
         </Card>
     );
