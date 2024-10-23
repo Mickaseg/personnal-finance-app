@@ -47,7 +47,7 @@ const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
                     </div>
                     <ActionDropdown items={menuItems}>
                         <button>
-                            <img src={Ellipsis} alt="Ellipsis"/>
+                            <img src={Ellipsis} alt="Ellipsis" className={"p-2"}/>
                         </button>
                     </ActionDropdown>
 

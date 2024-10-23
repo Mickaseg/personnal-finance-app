@@ -46,7 +46,7 @@ const SpendingTracker = ({
                     </div>
                     <ActionDropdown items={menuItems}>
                         <button>
-                            <img src={Ellipsis} alt="Ellipsis"/>
+                            <img className={"p-2"} src={Ellipsis} alt="Ellipsis"/>
                         </button>
                     </ActionDropdown>
                     <DeleteModal isOpen={isOpenDelete} setIsOpen={setIsOpenDelete} element={name}/>

@@ -1,8 +1,15 @@
 import SearchIcon from '../../assets/images/icon-search.svg';
 import SortIcon from '../../assets/images/icon-sort-mobile.svg';
 import FilterIcon from '../../assets/images/icon-filter-mobile.svg';
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue
+} from "@/components/ui/select"
 
-const TransactionsSearchForm = () => {
+const BillsSearchForm = () => {
     return (
         <form className={"flex justify-between items-center"}>
 
@@ -14,22 +21,23 @@ const TransactionsSearchForm = () => {
 
             {/*TODO : On desktop, separate inputs*/}
             {/*<div className={"lg:flex gap-3"}>*/}
-            <div>
-                <div className={"md:hidden"}>
-                    <label className={"hidden"}>Sort by</label>
-                    <img src={SortIcon} alt="sort icon"/>
-                </div>
-                <div className={"hidden md:flex md:items-center gap-3"}>
-                    <label className={"text-preset4"}>Sort by</label>
-                    <select className={"border-2 border-grey300 gap-4 px-3 py-3 rounded-xl"}>
-                        <option>Latest</option>
-                    </select>
-                </div>
-
+            <div className={"hidden md:flex md:items-center gap-3"}>
+                <Select>
+                    <SelectTrigger className="w-[120px]">
+                        <SelectValue placeholder="Sort by"/>
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value={"latest"}>Latest</SelectItem>
+                        <SelectItem value={"oldest"}>Oldest</SelectItem>
+                        <SelectItem value={"atoz"}>A to Z</SelectItem>
+                        <SelectItem value={"ztoa"}>Z to A</SelectItem>
+                        <SelectItem value={"highest"}>Highest</SelectItem>
+                        <SelectItem value={"lowest"}>Lowest</SelectItem>
+                    </SelectContent>
+                </Select>
             </div>
-
         </form>
     );
 };
 
-export default TransactionsSearchForm;
+export default BillsSearchForm;
