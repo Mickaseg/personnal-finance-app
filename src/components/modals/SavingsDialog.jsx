@@ -74,7 +74,7 @@ const SavingsDialog = ({
                     <div className="relative h-2 bg-gray-100 rounded-full">
                         <div
                             className={`absolute h-full rounded-full ${barColor} transition-all duration-300`}
-                            style={{width: `${newPercentage}%`, "max-width": "100%"}}
+                            style={{width: `${newPercentage}%`, "maxWidth": "100%"}}
                         />
                     </div>
 

@@ -156,7 +156,7 @@ const TransactionTable = () => {
             </div>
 
             {/* Pagination Controls - Same for both views */}
-            <div className="flex items-center justify-center space-x-2 py-4">
+            <div className="flex items-center justify-center space-x-2 py-4 lg:justify-between">
 
                 <button
                     onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}

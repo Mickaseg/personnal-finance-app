@@ -7,6 +7,7 @@ import Transactions from './pages/Transactions'
 import Budgets from './pages/Budgets'
 import Pots from './pages/Pots'
 import RecurringBills from './pages/RecurringBills'
+import NotFound from './pages/404'
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                 <Route path="budgets" element={<Budgets />} />
                 <Route path="pots" element={<Pots />} />
                 <Route path="recurring-bills" element={<RecurringBills />} />
+                <Route path="*" element={<NotFound />} />
             </Routes>
             </Router>
         </>
