@@ -3,7 +3,7 @@ import ShowPassword from "@/assets/images/icon-show-password.svg";
 
 const LoginForm = () => {
     return (
-        <form className={"bg-white rounded-lg p-6 md:p-8 w-11/12 md:w-9/12 flex flex-col gap-8 lg:w-6/12"}>
+        <form className={"bg-white rounded-lg p-6 md:p-8 w-11/12 md:w-9/12 flex flex-col gap-8 lg:w-6/12 lg:max-w-[560px]"}>
 
             <h1 className={"text-preset1 text-grey900 font-bold"}>Login</h1>
 
@@ -29,7 +29,7 @@ const LoginForm = () => {
                 Login
             </button>
             <button className={"w-full py-4 text-preset5 rounded-xl text-grey500"}>
-                Already have an account ? <span className={"text-grey900 font-bold"}>Sign Up</span>
+                Already have an account ? <a className={"text-grey900 font-bold hover:underline"}>Sign Up</a>
             </button>
 
         </form>

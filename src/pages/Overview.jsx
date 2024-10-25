@@ -37,9 +37,11 @@ const Overview = () => {
                 </div>
             </section>
 
-            <div className={"flex flex-col gap-8"}>
+            <div className={"flex flex-col gap-8 parent"}>
+
                 {/*POTS*/}
-                <section className={"py-6 px-5 bg-white rounded-xl flex flex-col gap-5 md:p-8"}>
+                <section
+                    className={"py-6 px-5 bg-white order-1 rounded-xl flex flex-col gap-5  lg:h-[218px] justify-center div1"}>
 
                     <div className={"flex justify-between "}>
                         <h2 className={"text-preset2 font-bold"}>Pots</h2>
@@ -51,8 +53,8 @@ const Overview = () => {
 
                     <div className={"flex flex-col md:flex-row gap-5"}>
 
-                        <div className={"bg-beige200 p-5 flex gap-4 rounded-xl md:w-1/3"}>
-                            <img src={PotsIcon} alt=""/>
+                        <div className={"bg-beige200 p-5 flex gap-4 rounded-xl md:w-1/3 items-center"}>
+                            <img src={PotsIcon} alt="" className={"w-10 h-10"}/>
                             <div>
                                 <p className={"text-preset4"}>Total Saved</p>
                                 <p className={"text-preset1"}>$850</p>
@@ -65,9 +67,10 @@ const Overview = () => {
                 </section>
 
                 {/*  TRANSACTIONS  */}
-                <section className={"py-6 px-5 bg-white rounded-xl flex flex-col gap-8 md:p-8"}>
+                <section
+                    className={"py-6 px-5 bg-white order-2 rounded-xl flex flex-col gap-8 md:p-8 lg:h-[520px] justify-center div3"}>
 
-                    <div className={"flex justify-between "}>
+                    <div className={"flex justify-between"}>
                         <h2 className={"text-preset2 font-bold"}>Transactions</h2>
                         <div className={"flex gap-2 justify-center items-center"}>
                             <p className={"text-preset4"}>View Details</p>
@@ -78,7 +81,7 @@ const Overview = () => {
                     {/*AVATARS*/}
                     <ul className={'flex flex-col'}>
 
-                        <li className={"flex justify-around w-full items-center border-t-2 pt-5 pb-5"}>
+                        <li className={"flex justify-between w-full items-center border-t-2 pt-5 pb-5 first:border-0 first:pt-0"}>
                             <div className={"flex items-center gap-3"}>
                                 <img className={"w-8 h-8 rounded-full"} src={Avatar} alt=""/>
                                 <p className={"text-preset4 font-bold "}>Savory Bites Bistro</p>
@@ -89,7 +92,7 @@ const Overview = () => {
                             </div>
                         </li>
 
-                        <li className={"flex justify-around w-full items-center border-t-2 pt-5 pb-5"}>
+                        <li className={"flex justify-between w-full items-center border-t-2 pt-5 pb-5 first:border-0 first:pt-0 "}>
                             <div className={"flex items-center gap-3"}>
                                 <img className={"w-8 h-8 rounded-full"} src={Avatar} alt=""/>
                                 <p className={"text-preset4 font-bold "}>Savory Bites Bistro</p>
@@ -100,7 +103,7 @@ const Overview = () => {
                             </div>
                         </li>
 
-                        <li className={"flex justify-around w-full items-center border-t-2 pt-5 pb-5"}>
+                        <li className={"flex justify-between w-full items-center border-t-2 pt-5 pb-5 first:border-0 first:pt-0 "}>
                             <div className={"flex items-center gap-3"}>
                                 <img className={"w-8 h-8 rounded-full"} src={Avatar} alt=""/>
                                 <p className={"text-preset4 font-bold "}>Savory Bites Bistro</p>
@@ -111,7 +114,7 @@ const Overview = () => {
                             </div>
                         </li>
 
-                        <li className={"flex justify-around w-full items-center border-t-2 pt-5 pb-5"}>
+                        <li className={"flex justify-between w-full items-center border-t-2 pt-5 pb-5 first:border-0 first:pt-0 "}>
                             <div className={"flex items-center gap-3"}>
                                 <img className={"w-8 h-8 rounded-full"} src={Avatar} alt=""/>
                                 <p className={"text-preset4 font-bold "}>Savory Bites Bistro</p>
@@ -122,7 +125,7 @@ const Overview = () => {
                             </div>
                         </li>
 
-                        <li className={"flex justify-around w-full items-center border-t-2 pt-5 pb-5"}>
+                        <li className={"flex justify-between w-full items-center border-t-2 pt-5 pb-5 first:border-0 first:pt-0 "}>
                             <div className={"flex items-center gap-3"}>
                                 <img className={"w-8 h-8 rounded-full"} src={Avatar} alt=""/>
                                 <p className={"text-preset4 font-bold "}>Savory Bites Bistro</p>
@@ -138,7 +141,8 @@ const Overview = () => {
                 </section>
 
                 {/*BUDGETS*/}
-                <section className={"py-6 px-5 bg-white rounded-xl flex flex-col gap-2 md:p-8"}>
+                <section
+                    className={"py-6 px-5 bg-white order-3 rounded-xl flex flex-col gap-2 md:p-8 lg:h-[410px] justify-center lg:order-2 div2"}>
 
                     <div className={"flex justify-between "}>
                         <h2 className={"text-preset2 font-bold"}>Budgets</h2>
@@ -155,7 +159,7 @@ const Overview = () => {
                 </section>
 
                 {/*RECURRING BILLS*/}
-                <section className={"py-6 px-5 bg-white rounded-xl flex flex-col gap-8"}>
+                <section className={"py-6 px-5 bg-white order-4 rounded-xl flex flex-col gap-8 justify-center div4"}>
 
                     <div className={"flex justify-between"}>
                         <h2 className={"text-preset2 font-bold"}>Recurring Bills</h2>
@@ -183,6 +187,7 @@ const Overview = () => {
 
 
                 </section>
+
             </div>
 
         </div>
