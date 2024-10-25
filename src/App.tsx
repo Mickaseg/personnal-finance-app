@@ -10,23 +10,33 @@ import RecurringBills from './pages/RecurringBills'
 import NotFound from './pages/404'
 import Login from './pages/Login'
 
+const ProtectedRoute = ({ children }) => {
+    return (
+        <>
+            <Navbar />
+            {children}
+        </>
+    );
+};
+
 function App() {
 
     return (
-        <>
-            <Router>
-                <Navbar/>
-            <Routes>
-                <Route path="/login" element={<Login />} />
+        <Router>
+        <Routes>
+            <Route path="/login" element={<Login />} />
+
+            {/* Protect all other routes with navbar */}
+            {/*<Route element={<ProtectedRoute />}>*/}
                 <Route path="/" element={<Overview />} />
                 <Route path="transactions" element={<Transactions />} />
                 <Route path="budgets" element={<Budgets />} />
                 <Route path="pots" element={<Pots />} />
                 <Route path="recurring-bills" element={<RecurringBills />} />
                 <Route path="*" element={<NotFound />} />
-            </Routes>
-            </Router>
-        </>
+            {/*</Route>*/}
+        </Routes>
+        </Router>
     )
 }
 

@@ -19,7 +19,7 @@ const Navbar = () => {
     }
 
     return (<nav
-        className={`z-10 bg-grey900 fixed bottom-0 w-screen pt-4 rounded-t-lg  lg:h-screen ${expanded ? "lg:w-64" : "lg:w-24"} transition-all`}>
+        className={`z-10 bg-grey900 fixed bottom-0 w-screen pt-4 rounded-t-lg  lg:h-screen ${expanded ? "lg:w-64" : "lg:w-24"} transition-all lg:rounded-r-lg lg:rounded-tl-none`}>
 
         <div className={"flex justify-start lg:p-8"}>
             {expanded ? <img src={LogoLarge} className={"h-6 hidden lg:block whitespace-nowrap w-24"} alt=""/> :

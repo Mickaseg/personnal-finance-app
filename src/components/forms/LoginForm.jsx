@@ -3,7 +3,7 @@ import ShowPassword from "@/assets/images/icon-show-password.svg";
 
 const LoginForm = () => {
     return (
-        <form className={"bg-white rounded-lg p-6 md:p-8 w-11/12 md:w-9/12 flex flex-col gap-8"}>
+        <form className={"bg-white rounded-lg p-6 md:p-8 w-11/12 md:w-9/12 flex flex-col gap-8 lg:w-6/12"}>
 
             <h1 className={"text-preset1 text-grey900 font-bold"}>Login</h1>
 
