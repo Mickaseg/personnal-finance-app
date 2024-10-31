@@ -5,8 +5,8 @@ import TransactionsTableRow from "./TransactionsTableRow.jsx";
 
 import test from '../../assets/images/avatars/aqua-flow-utilities.jpg';
 
-const TransactionTable = ({transactions}) => {
-    const [currentPage, setCurrentPage] = useState(1);
+const TransactionTable = ({transactions, currentPage, setCurrentPage}) => {
+    // const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     // const transactions = [
     //     {

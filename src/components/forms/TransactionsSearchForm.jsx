@@ -14,10 +14,11 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 
 
-const TransactionsSearchForm = ({transactions, setTransactions, originalTransactions}) => {
+const TransactionsSearchForm = ({transactions, setTransactions, originalTransactions, currentPage, setCurrentPage}) => {
 
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [isSorted, setIsSorted] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/categories')
@@ -30,8 +31,12 @@ const TransactionsSearchForm = ({transactions, setTransactions, originalTransact
             });
     }, []);
 
+
+
+
     const handleSortCategory = (selectedValue) => {
-        if ('All' === selectedValue) {
+        setCurrentPage(1);
+        if (selectedValue === "All") {
             setTransactions(originalTransactions);
             return;
         }
@@ -40,6 +45,7 @@ const TransactionsSearchForm = ({transactions, setTransactions, originalTransact
     };
 
     const handleSort = (selectedValue) => {
+        setCurrentPage(1);
         switch (selectedValue) {
             case 'latest':
                 setTransactions([...originalTransactions].sort((a, b) => new Date(b.date) - new Date(a.date)));
@@ -65,6 +71,7 @@ const TransactionsSearchForm = ({transactions, setTransactions, originalTransact
     }
 
     const handleSearch = (e) => {
+        setCurrentPage(1);
         const searchValue = e.target.value;
         const filteredTransactions = originalTransactions.filter((transaction) => transaction.name.toLowerCase().includes(searchValue.toLowerCase()));
         setTransactions(filteredTransactions);
