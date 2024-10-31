@@ -10,24 +10,73 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select"
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 
-const TransactionsSearchForm = () => {
+const TransactionsSearchForm = ({transactions, setTransactions, originalTransactions}) => {
+
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("");
+
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/categories')
+            .then((response) => {
+                const categories = response.data.map((category) => category.name);
+                setCategories(categories);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, []);
+
+    const handleSortCategory = (selectedValue) => {
+        if ('All' === selectedValue) {
+            setTransactions(originalTransactions);
+            return;
+        }
+        const filteredCat = originalTransactions.filter((transaction) => transaction.category === selectedValue);
+        setTransactions(filteredCat);
+    };
+
+    const handleSort = (selectedValue) => {
+        switch (selectedValue) {
+            case 'latest':
+                setTransactions([...originalTransactions].sort((a, b) => new Date(b.date) - new Date(a.date)));
+                break;
+            case 'oldest':
+                setTransactions([...originalTransactions].sort((a, b) => new Date(a.date) - new Date(b.date)));
+                break;
+            case 'atoz':
+                setTransactions([...originalTransactions].sort((a, b) => a.name.localeCompare(b.name)));
+                break;
+            case 'ztoa':
+                setTransactions([...originalTransactions].sort((a, b) => b.name.localeCompare(a.name)));
+                break;
+            case 'highest':
+                setTransactions([...originalTransactions].sort((a, b) => b.amount - a.amount));
+                break;
+            case 'lowest':
+                setTransactions([...originalTransactions].sort((a, b) => a.amount - b.amount));
+                break;
+            default:
+                break;
+        }
+    }
+
+    const handleSearch = (e) => {
+        const searchValue = e.target.value;
+        const filteredTransactions = originalTransactions.filter((transaction) => transaction.name.toLowerCase().includes(searchValue.toLowerCase()));
+        setTransactions(filteredTransactions);
+    }
+
+    console.log(categories)
     return (
         <form className={"flex justify-evenly items-center lg:justify-between"}>
-
             <div className={"flex border-2 border-grey300 px-3 py-3 rounded-xl items-center"}>
-                {/*<Input*/}
-                {/*    type="text"*/}
-                {/*    value={transactionName}*/}
-                {/*    onChange={(e) => {*/}
-                {/*        setTransactionName(e.target.value);*/}
-                {/*    }}*/}
-                {/*    className="pl-7"*/}
-                {/*    placeholder="Search transaction"*/}
-                {/*/>*/}
+
                 <label className={"hidden"}>Search transaction</label>
-                <input placeholder={"Search transactions"}></input>
+                <input placeholder={"Search transactions"} onChange={handleSearch}></input>
                 <img alt="search icon" className={"icon w-4 h-4 ml-2"} src={SearchIcon}/>
             </div>
 
@@ -39,7 +88,7 @@ const TransactionsSearchForm = () => {
                     <img src={SortIcon} alt="sort icon" className={""}/>
                 </div>
                 <div className={"hidden md:flex md:items-center gap-3"}>
-                    <Select>
+                    <Select onValueChange={handleSort}>
                         <SelectTrigger className="w-[120px]">
                             <SelectValue placeholder="Sort by"/>
                         </SelectTrigger>
@@ -60,12 +109,19 @@ const TransactionsSearchForm = () => {
                     <img src={FilterIcon} alt={"filter icon"}/>
                 </div>
                 <div className={"hidden md:flex md:items-center gap-3"}>
-                    <Select>
+                    <Select onValueChange={handleSortCategory}>
                         <SelectTrigger className="w-[120px]">
                             <SelectValue placeholder="Category"/>
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value={"latest"}>Entertainment</SelectItem>
+                            <SelectItem value={"All"}>
+                                All
+                            </SelectItem>
+                            {categories.map((category, index) => (
+                                <SelectItem key={index} value={category}>
+                                    {category}
+                                </SelectItem>
+                            ))}
                         </SelectContent>
                     </Select>
                 </div>

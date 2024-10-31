@@ -1,57 +1,60 @@
 import {useState} from 'react';
 import CaretLeft from '../../assets/images/icon-caret-left.svg';
 import CaretRight from '../../assets/images/icon-caret-right.svg';
+import TransactionsTableRow from "./TransactionsTableRow.jsx";
 
-const TransactionTable = () => {
+import test from '../../assets/images/avatars/aqua-flow-utilities.jpg';
+
+const TransactionTable = ({transactions}) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
-    const transactions = [
-        {
-            id: 1,
-            name: 'Bravo Zen Spa',
-            category: 'Personal Care',
-            date: '29 Aug 2024',
-            amount: -25.00,
-            bgColor: 'bg-orange-100',
-            textColor: 'text-orange-600'
-        },
-        {
-            id: 2,
-            name: 'Alpha Analytics',
-            category: 'General',
-            date: '27 Aug 2024',
-            amount: 450.00,
-            bgColor: 'bg-teal-100',
-            textColor: 'text-teal-600'
-        },
-        {
-            id: 3,
-            name: 'Echo Game Store',
-            category: 'Lifestyle',
-            date: '22 Aug 2024',
-            amount: -21.50,
-            bgColor: 'bg-purple-100',
-            textColor: 'text-purple-600'
-        },
-        {
-            id: 4,
-            name: 'Food Merchant',
-            category: 'General',
-            date: '20 Aug 2024',
-            amount: -21.50,
-            bgColor: 'bg-gray-100',
-            textColor: 'text-gray-600'
-        },
-        {
-            id: 5,
-            name: 'Delta Taxi',
-            category: 'Transportation',
-            date: '19 Aug 2024',
-            amount: -15.00,
-            bgColor: 'bg-blue-100',
-            textColor: 'text-blue-600'
-        }
-    ];
+    // const transactions = [
+    //     {
+    //         id: 1,
+    //         name: 'Bravo Zen Spa',
+    //         category: 'Personal Care',
+    //         date: '29 Aug 2024',
+    //         amount: -25.00,
+    //         bgColor: 'bg-orange-100',
+    //         textColor: 'text-orange-600'
+    //     },
+    //     {
+    //         id: 2,
+    //         name: 'Alpha Analytics',
+    //         category: 'General',
+    //         date: '27 Aug 2024',
+    //         amount: 450.00,
+    //         bgColor: 'bg-teal-100',
+    //         textColor: 'text-teal-600'
+    //     },
+    //     {
+    //         id: 3,
+    //         name: 'Echo Game Store',
+    //         category: 'Lifestyle',
+    //         date: '22 Aug 2024',
+    //         amount: -21.50,
+    //         bgColor: 'bg-purple-100',
+    //         textColor: 'text-purple-600'
+    //     },
+    //     {
+    //         id: 4,
+    //         name: 'Food Merchant',
+    //         category: 'General',
+    //         date: '20 Aug 2024',
+    //         amount: -21.50,
+    //         bgColor: 'bg-gray-100',
+    //         textColor: 'text-gray-600'
+    //     },
+    //     {
+    //         id: 5,
+    //         name: 'Delta Taxi',
+    //         category: 'Transportation',
+    //         date: '19 Aug 2024',
+    //         amount: -15.00,
+    //         bgColor: 'bg-blue-100',
+    //         textColor: 'text-blue-600'
+    //     }
+    // ];
 
     // Calculate pagination
     const totalPages = Math.ceil(transactions.length / itemsPerPage);
@@ -71,12 +74,12 @@ const TransactionTable = () => {
         <div className="w-full mx-auto bg-white">
             {/* Mobile View (default) */}
             <div className="block md:hidden divide-y divide-gray-100">
-                {paginatedTransactions.map((transaction) => (
+                {paginatedTransactions.map((transaction,) => (
                     <div key={transaction.id} className="flex items-center justify-between py-3 px-4">
                         <div className="flex items-center space-x-3">
                             <div
-                                className={`${transaction.bgColor} ${transaction.textColor} h-10 w-10 rounded-full flex items-center justify-center font-medium text-sm`}>
-                                {transaction.name.charAt(0)}
+                                className={`h-10 w-10 rounded-full flex items-center justify-center`}>
+                                <img src={transaction.avatar} alt={transaction.name}/>
                             </div>
                             <div className="flex flex-col">
                 <span className="text-sm font-medium text-gray-900">
@@ -122,34 +125,7 @@ const TransactionTable = () => {
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
                     {paginatedTransactions.map((transaction) => (
-                        <tr key={transaction.id} className="hover:bg-gray-50">
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="flex items-center">
-                                    <div
-                                        className={`${transaction.bgColor} ${transaction.textColor} h-8 w-8 rounded-full flex items-center justify-center font-medium text-sm`}>
-                                        {transaction.name.charAt(0)}
-                                    </div>
-                                    <div className="ml-4">
-                                        <div className="text-sm font-medium text-gray-900">
-                                            {transaction.name}
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-500">{transaction.category}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-500">{transaction.date}</div>
-                            </td>
-                            <td className="px-6 py-4 whitespace-nowrap text-right">
-                                <div className={`text-sm font-medium ${
-                                    transaction.amount >= 0 ? 'text-green' : 'text-red'
-                                }`}>
-                                    {transaction.amount >= 0 ? '+' : '-'}${Math.abs(transaction.amount).toFixed(2)}
-                                </div>
-                            </td>
-                        </tr>
+                        <TransactionsTableRow transaction={transaction}/>
                     ))}
                     </tbody>
                 </table>
