@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select"
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {getCategories} from "@/api/CategoriesRequests.jsx";
 
 
 const TransactionsSearchForm = ({transactions, setTransactions, originalTransactions, currentPage, setCurrentPage}) => {
@@ -20,19 +21,13 @@ const TransactionsSearchForm = ({transactions, setTransactions, originalTransact
     const [selectedCategory, setSelectedCategory] = useState("");
     const [isSorted, setIsSorted] = useState(false);
 
+
     useEffect(() => {
-        axios.get('http://localhost:5000/api/categories')
-            .then((response) => {
-                const categories = response.data.map((category) => category.name);
-                setCategories(categories);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        getCategories().then((data) => {
+            const categoryNames = data.map(category => category.name);
+            setCategories(categoryNames);
+        });
     }, []);
-
-
-
 
     const handleSortCategory = (selectedValue) => {
         setCurrentPage(1);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 
 import ExpensesLegend from "../components/cards/ExpensesLegend.jsx";
 import MultiSegmentDonut from "../components/donuts/MultiSegmentDonut.jsx";
@@ -6,8 +6,11 @@ import MultiSegmentDonut from "../components/donuts/MultiSegmentDonut.jsx";
 import CaretRight from "../assets/images/icon-caret-right.svg";
 import PotsIcon from "../assets/images/icon-pot.svg";
 import Avatar from "../assets/images/avatars/rina-sato.jpg";
+import {getBalance, updateBalance} from "@/api/BalanceRequests.jsx";
+
 
 const Overview = () => {
+    const [balance, setBalance] = useState([]);
 
     const data = [
         {title: 'Bills', value: '$1,250', colorLegend: 'border-red'},
@@ -15,6 +18,14 @@ const Overview = () => {
         {title: 'Food', value: '$500', colorLegend: 'border-green'},
         {title: 'Entertainment', value: '$100', colorLegend: 'border-yellow'},
     ];
+
+    useEffect(() => {
+        getBalance().then((response) => {
+            setBalance(response[0]);
+        })
+    }, []);
+
+    console.log(balance)
 
     return (
         <div className={"px-4 pt-6 pb-28 min-h-screen bg-beige200 flex flex-col gap-8 md:px-10 lg:pl-72 lg:pb-6"}>
@@ -25,7 +36,7 @@ const Overview = () => {
             <section className={"flex flex-col gap-3 md:flex-row md:gap-6"}>
                 <div className={'p-5 bg-grey900 rounded-xl text-white md:w-1/3'}>
                     <p className={'text-preset4'}>Current balance</p>
-                    <p className={"text-preset1 font-bold"}>$4,836.00</p>
+                    <p className={"text-preset1 font-bold"}>{balance.amount}</p>
                 </div>
                 <div className={'p-5 bg-white rounded-xl md:w-1/3'}>
                     <p className={'text-preset4'}>Income</p>

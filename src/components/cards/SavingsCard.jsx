@@ -7,13 +7,13 @@ import DeleteModal from "@/components/modals/DeleteModal.jsx";
 import SavingsDialog from "@/components/modals/SavingsDialog.jsx";
 
 
-const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
+const SavingsCard = ({potData,barColor, setEditingPot, setIsOpen}) => {
     const [isOpenDelete, setIsOpenDelete] = useState(false);
     const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
     const [isAddOpen, setIsAddOpen] = useState(false);
 
-    const {id, name, savedAmount, targetAmount, barColor} = potData;
-    const progressPercentage = (savedAmount / targetAmount) * 100;
+    // const {id, name, savedAmount, targetAmount, barColor} = potData;
+    const progressPercentage = (potData.current / potData.target) * 100;
 
     const handleEdit = () => {
         setEditingPot(potData);
@@ -43,7 +43,7 @@ const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
                 <CardTitle className="text-md flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <div className={`w-3 h-3 rounded-full ${barColor}`}></div>
-                        {name}
+                        {potData.name}
                     </div>
                     <ActionDropdown items={menuItems}>
                         <button>
@@ -60,8 +60,8 @@ const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
                 <div>
                     <div className="text-gray-600 text-sm mb-1">Total Saved</div>
                     <div className="flex items-baseline justify-between mb-2">
-                        <span className="text-3xl font-semibold">${savedAmount.toFixed(2)}</span>
-                        <span className="text-gray-500 text-sm">Target of ${targetAmount}</span>
+                        <span className="text-3xl font-semibold">${potData.current.toFixed(2)}</span>
+                        <span className="text-gray-500 text-sm">Target of ${potData.current}</span>
                     </div>
                     <Progress
                         color={barColor}
@@ -94,29 +94,29 @@ const SavingsCard = ({potData, setEditingPot, setIsOpen}) => {
                     </button>
                 </div>
 
-                <SavingsDialog
-                    isOpen={isWithdrawOpen}
-                    onClose={() => setIsWithdrawOpen(false)}
-                    title={name}
-                    currentAmount={savedAmount}
-                    targetAmount={targetAmount}
-                    percentage={progressPercentage}
-                    type="withdraw"
-                    onConfirm={(amount) => handleWithdraw(amount)}
-                    barColor={barColor}
-                />
+                {/*<SavingsDialog*/}
+                {/*    isOpen={isWithdrawOpen}*/}
+                {/*    onClose={() => setIsWithdrawOpen(false)}*/}
+                {/*    title={name}*/}
+                {/*    currentAmount={savedAmount}*/}
+                {/*    targetAmount={targetAmount}*/}
+                {/*    percentage={progressPercentage}*/}
+                {/*    type="withdraw"*/}
+                {/*    onConfirm={(amount) => handleWithdraw(amount)}*/}
+                {/*    barColor={barColor}*/}
+                {/*/>*/}
 
-                <SavingsDialog
-                    isOpen={isAddOpen}
-                    onClose={() => setIsAddOpen(false)}
-                    title={name}
-                    currentAmount={savedAmount}
-                    targetAmount={targetAmount}
-                    percentage={progressPercentage}
-                    type="add"
-                    onConfirm={(amount) => handleAdd(amount)}
-                    barColor={barColor}
-                />
+                {/*<SavingsDialog*/}
+                {/*    isOpen={isAddOpen}*/}
+                {/*    onClose={() => setIsAddOpen(false)}*/}
+                {/*    title={name}*/}
+                {/*    currentAmount={savedAmount}*/}
+                {/*    targetAmount={targetAmount}*/}
+                {/*    percentage={progressPercentage}*/}
+                {/*    type="add"*/}
+                {/*    onConfirm={(amount) => handleAdd(amount)}*/}
+                {/*    barColor={barColor}*/}
+                {/*/>*/}
 
             </CardContent>
         </Card>
