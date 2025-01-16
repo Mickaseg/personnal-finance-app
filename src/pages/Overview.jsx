@@ -7,10 +7,13 @@ import CaretRight from "../assets/images/icon-caret-right.svg";
 import PotsIcon from "../assets/images/icon-pot.svg";
 import Avatar from "../assets/images/avatars/rina-sato.jpg";
 import {getBalance, updateBalance} from "@/api/BalanceRequests.jsx";
+import {getPots, getTotalSavings} from "@/api/PotsRequests.jsx";
 
 
 const Overview = () => {
     const [balance, setBalance] = useState([]);
+    const [savings, setSavings] = useState();
+    const [pots, setPots] = useState([]);
 
     const data = [
         {title: 'Bills', value: '$1,250', colorLegend: 'border-red'},
@@ -20,9 +23,19 @@ const Overview = () => {
     ];
 
     useEffect(() => {
+
         getBalance().then((response) => {
             setBalance(response[0]);
         })
+
+        getTotalSavings().then((response) => {
+            setSavings(response.totalBalance)
+        })
+
+        getPots().then((response) => {
+            setPots(response)
+        })
+
     }, []);
 
     console.log(balance)
@@ -36,15 +49,15 @@ const Overview = () => {
             <section className={"flex flex-col gap-3 md:flex-row md:gap-6"}>
                 <div className={'p-5 bg-grey900 rounded-xl text-white md:w-1/3'}>
                     <p className={'text-preset4'}>Current balance</p>
-                    <p className={"text-preset1 font-bold"}>{balance.amount}</p>
+                    <p className={"text-preset1 font-bold"}>${balance.current}</p>
                 </div>
                 <div className={'p-5 bg-white rounded-xl md:w-1/3'}>
                     <p className={'text-preset4'}>Income</p>
-                    <p className={"text-preset1 font-bold"}>$3850.00</p>
+                    <p className={"text-preset1 font-bold"}>${balance.income}</p>
                 </div>
                 <div className={'p-5 bg-white rounded-xl md:w-1/3'}>
                     <p className={'text-preset4'}>Expenses</p>
-                    <p className={"text-preset1 font-bold"}>$1750.00</p>
+                    <p className={"text-preset1 font-bold"}>${balance.expenses}</p>
                 </div>
             </section>
 
@@ -68,11 +81,11 @@ const Overview = () => {
                             <img src={PotsIcon} alt="" className={"w-10 h-10"}/>
                             <div>
                                 <p className={"text-preset4"}>Total Saved</p>
-                                <p className={"text-preset1"}>$850</p>
+                                <p className={"text-preset1"}>${savings}</p>
                             </div>
                         </div>
 
-                        <ExpensesLegend segments={data} style={"md:w-2/3 "}/>
+                        <ExpensesLegend segments={pots} style={"md:w-2/3 "}/>
                     </div>
 
                 </section>

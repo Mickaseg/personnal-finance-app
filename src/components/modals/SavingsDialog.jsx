@@ -36,7 +36,7 @@ const SavingsDialog = ({
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onConfirm(amount);
+        onConfirm(newAmount);
         onClose();
     };
 

@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+
 const TransactionsTableRow = ({transaction}) => {
     const [avatarSrc, setAvatarSrc] = useState(null);
 
@@ -7,7 +8,9 @@ const TransactionsTableRow = ({transaction}) => {
         const loadAvatar = async () => {
             try {
                 // Use import() to dynamically load the avatar image
-                const avatarModule = await import(`../../${transaction.avatar.slice(2)}`);
+                const avatarModule = await import(
+                    /* @vite-ignore */
+                    `../../${transaction.avatar.slice(2)}`);
                 setAvatarSrc(avatarModule.default);
             } catch (error) {
                 console.error('Error loading avatar:', error);

@@ -2,7 +2,8 @@ import React from 'react';
 import Modal from "@/components/modals/Modal.jsx";
 import NewPotForm from "@/components/forms/NewPotForm.jsx";
 
-const DeleteModal = ({element, type, isOpen, setIsOpen}) => {
+const DeleteModal = ({element,type, isOpen, setIsOpen, handleDelete}) => {
+
     return (
         <Modal
             isOpen={isOpen}
@@ -16,7 +17,7 @@ const DeleteModal = ({element, type, isOpen, setIsOpen}) => {
                     <button
                         className="w-full bg-red text-white py-4 rounded-xl text-preset4 font-bold"
                         onClick={() => {
-                            // Handle form submission
+                            handleDelete()
                             setIsOpen(false);
                         }}
                     >

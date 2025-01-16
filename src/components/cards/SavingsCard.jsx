@@ -5,9 +5,10 @@ import Ellipsis from "../../assets/images/icon-ellipsis.svg";
 import ActionDropdown from "@/components/nav/ActionDropdown.jsx";
 import DeleteModal from "@/components/modals/DeleteModal.jsx";
 import SavingsDialog from "@/components/modals/SavingsDialog.jsx";
+import {deletePot, withdrawFromPot, addToPot} from "@/api/PotsRequests.jsx";
 
 
-const SavingsCard = ({potData,barColor, setEditingPot, setIsOpen}) => {
+const SavingsCard = ({potData, barColor, setEditingPot, setIsOpen, fetchPots}) => {
     const [isOpenDelete, setIsOpenDelete] = useState(false);
     const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
     const [isAddOpen, setIsAddOpen] = useState(false);
@@ -36,6 +37,24 @@ const SavingsCard = ({potData,barColor, setEditingPot, setIsOpen}) => {
         },
     ];
 
+    const handleDeletePot = async () => {
+        await deletePot(potData._id);
+        fetchPots();
+        setIsOpenDelete(false);
+    }
+
+    const handleWithdraw = async (amount) => {
+        console.log(amount)
+        await withdrawFromPot(potData._id, amount);
+        fetchPots();
+    }
+
+    const handleAdd = async (amount) => {
+        console.log(amount)
+        await addToPot(potData._id, amount);
+        fetchPots();
+    }
+
 
     return (
         <Card className="w-full bg-white">
@@ -51,7 +70,7 @@ const SavingsCard = ({potData,barColor, setEditingPot, setIsOpen}) => {
                         </button>
                     </ActionDropdown>
 
-                    <DeleteModal isOpen={isOpenDelete} setIsOpen={setIsOpenDelete} element={name}/>
+                    <DeleteModal isOpen={isOpenDelete} setIsOpen={setIsOpenDelete} element={potData.name} elementId={potData.id} handleDelete={handleDeletePot}/>
 
                 </CardTitle>
             </CardHeader>
@@ -61,7 +80,7 @@ const SavingsCard = ({potData,barColor, setEditingPot, setIsOpen}) => {
                     <div className="text-gray-600 text-sm mb-1">Total Saved</div>
                     <div className="flex items-baseline justify-between mb-2">
                         <span className="text-3xl font-semibold">${potData.current.toFixed(2)}</span>
-                        <span className="text-gray-500 text-sm">Target of ${potData.current}</span>
+                        <span className="text-gray-500 text-sm">Target of ${potData.target}</span>
                     </div>
                     <Progress
                         color={barColor}
@@ -94,29 +113,29 @@ const SavingsCard = ({potData,barColor, setEditingPot, setIsOpen}) => {
                     </button>
                 </div>
 
-                {/*<SavingsDialog*/}
-                {/*    isOpen={isWithdrawOpen}*/}
-                {/*    onClose={() => setIsWithdrawOpen(false)}*/}
-                {/*    title={name}*/}
-                {/*    currentAmount={savedAmount}*/}
-                {/*    targetAmount={targetAmount}*/}
-                {/*    percentage={progressPercentage}*/}
-                {/*    type="withdraw"*/}
-                {/*    onConfirm={(amount) => handleWithdraw(amount)}*/}
-                {/*    barColor={barColor}*/}
-                {/*/>*/}
+                <SavingsDialog
+                    isOpen={isWithdrawOpen}
+                    onClose={() => setIsWithdrawOpen(false)}
+                    title={potData.name}
+                    currentAmount={potData.current}
+                    targetAmount={potData.target}
+                    percentage={progressPercentage}
+                    type="withdraw"
+                    onConfirm={(amount) => handleWithdraw(amount)}
+                    barColor={barColor}
+                />
 
-                {/*<SavingsDialog*/}
-                {/*    isOpen={isAddOpen}*/}
-                {/*    onClose={() => setIsAddOpen(false)}*/}
-                {/*    title={name}*/}
-                {/*    currentAmount={savedAmount}*/}
-                {/*    targetAmount={targetAmount}*/}
-                {/*    percentage={progressPercentage}*/}
-                {/*    type="add"*/}
-                {/*    onConfirm={(amount) => handleAdd(amount)}*/}
-                {/*    barColor={barColor}*/}
-                {/*/>*/}
+                <SavingsDialog
+                    isOpen={isAddOpen}
+                    onClose={() => setIsAddOpen(false)}
+                    title={potData.name}
+                    currentAmount={potData.current}
+                    targetAmount={potData.target}
+                    percentage={progressPercentage}
+                    type="add"
+                    onConfirm={(amount) => handleAdd(amount)}
+                    barColor={barColor}
+                />
 
             </CardContent>
         </Card>

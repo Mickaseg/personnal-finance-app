@@ -11,12 +11,16 @@ const Pots = () => {
 
     const [pots, setPots] = useState([]);
 
+
+    const fetchPots = async () => {
+        const data = await getPots();
+        setPots(data);
+        console.log("fetching pots")
+    };
+
     useEffect(() => {
-            getPots().then((data) => {
-                setPots(data);
-            })
-        },
-        []);
+        fetchPots();
+    }, []);
 
     console.log(pots)
     return (
@@ -31,7 +35,7 @@ const Pots = () => {
                         className={"text-preset4 font-bold p-4 bg-grey900 text-white rounded-xl"}>
                     + Add New Pot
                 </button>
-                <PotsModal isOpen={isOpenEdit} setIsOpen={setIsOpenEdit} initialData={editingPot}/>
+                <PotsModal isOpen={isOpenEdit} setIsOpen={setIsOpenEdit} initialData={editingPot} fetchPots={fetchPots}/>
             </div>
 
             {/*SAVINGS*/}
@@ -49,6 +53,7 @@ const Pots = () => {
                             barColor={"bg-green"}
                             setEditingPot={setEditingPot}
                             setIsOpen={setIsOpenEdit}
+                            fetchPots={fetchPots}
                         />
                     ))}
                 </div>
