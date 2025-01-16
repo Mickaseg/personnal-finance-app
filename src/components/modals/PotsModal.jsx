@@ -1,9 +1,27 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import NewPotForm from "@/components/forms/NewPotForm.jsx";
 import Modal from "@/components/modals/Modal.jsx";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { XCircle } from "lucide-react";
 
-const PotsModal = ({ isOpen, setIsOpen, initialData = null, fetchPots }) => {
+const PotsModal = ({isOpen, setIsOpen, initialData = null, fetchPots}) => {
     const isEditMode = !!initialData;
+    const [error, setError] = useState(null);
+
+    // Clear error when modal closes
+    useEffect(() => {
+        if (!isOpen) {
+            setError(null);
+        }
+    }, [isOpen]);
+
+    // Error component
+    const ErrorAlert = ({message}) => (
+        <Alert variant="destructive" className="pt-4">
+            <XCircle className="h-4 w-4"/>
+            <AlertDescription>{message}</AlertDescription>
+        </Alert>
+    );
 
     return (
         <Modal
@@ -17,7 +35,8 @@ const PotsModal = ({ isOpen, setIsOpen, initialData = null, fetchPots }) => {
             }
 
         >
-            <NewPotForm initialData={initialData} setIsOpen={setIsOpen} isEditMode={isEditMode} fetchPots={fetchPots} />
+            {error && <ErrorAlert message={error} />}
+            <NewPotForm initialData={initialData} setIsOpen={setIsOpen} isEditMode={isEditMode} fetchPots={fetchPots} onError={setError}/>
         </Modal>
     );
 };
