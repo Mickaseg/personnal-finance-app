@@ -1,40 +1,23 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Card, CardContent} from "@/components/ui/card.tsx";
+import {getSummary} from "@/api/BudgetsRequests.jsx"
 
 
-const MultiSegmentDonutBudgets = ({
-                                      segments = [
-                                          {
-                                              title: 'Bills',
-                                              value: 100,
-                                              max: 150,
-                                              color: 'bg-red stroke-red',
-                                              colorLegend: 'border-red'
-                                          },
-                                          {
-                                              title: 'Transport',
-                                              value: 150,
-                                              max: 300,
-                                              color: 'bg-blue stroke-blue',
-                                              colorLegend: 'border-blue'
-                                          },
-                                          {
-                                              title: 'Food',
-                                              value: 100,
-                                              max: 150,
-                                              color: 'bg-green stroke-green',
-                                              colorLegend: 'border-green'
-                                          },
-                                          {
-                                              title: 'Food',
-                                              value: 100,
-                                              max: 150,
-                                              color: 'bg-green stroke-green',
-                                              colorLegend: 'border-green'
-                                          }
-                                      ],
-                                      limit = 750
-                                  }) => {
+const MultiSegmentDonutBudgets = ({segments}) => {
+    const [summary, setSummary] = useState([])
+
+
+    const fetchSummary = async () => {
+        const data = await getSummary();
+        setSummary(data);
+        console.log("fetching budgets")
+    };
+
+    useEffect(() => {
+        fetchSummary()
+    }, []);
+
+    const limit = summary.totalMax
 
     const size = 200;
     const strokeWidth = 20;
@@ -42,7 +25,7 @@ const MultiSegmentDonutBudgets = ({
     const circumference = 2 * Math.PI * radius;
 
     // Calculate total of all segments
-    const total = segments.reduce((sum, segment) => sum + segment.value, 0);
+    const total = segments.reduce((sum, segment) => sum + segment.spent, 0);
 
     // Calculate starting point for each segment
     let currentOffset = 0;
@@ -109,8 +92,8 @@ const MultiSegmentDonutBudgets = ({
                     {segments && segments.map((item) => {
                         return (
                             <li className={`flex items-center border-b-2 py-4 justify-between`}>
-                                <p className={`border-l-4 pl-4 ${item.colorLegend} text-preset4`}>{item.title}</p>
-                                <p className={'text-preset3 font-bold'}>${item.value} <span
+                                <p className={`border-l-4 pl-4 ${item.colorLegend} text-preset4`}>{item.name}</p>
+                                <p className={'text-preset3 font-bold'}>${item.spent} <span
                                     className={"text-preset5 text-grey500"}>of ${item.max}</span></p>
                             </li>
                         )

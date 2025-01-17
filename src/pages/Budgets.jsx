@@ -1,47 +1,27 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import SpendingTracker from "../components/cards/SpendingTracker.jsx";
 import MultiSegmentDonutBudgets from "../components/donuts/MultiSegmentDonutBudgets.jsx";
 import BudgetsModal from "../components/modals/BudgetsModal.jsx";
+import {getBudgets} from "@/api/BudgetsRequests.jsx";
 
 const Budgets = () => {
     const [isOpenEdit, setIsOpenEdit] = useState(false);
     const [editingBudget, setEditingBudget] = useState(null);
 
-    const mockData = [
-        {
-            id: 1,
-            name: "Entertainment",
-            spendingLimit: 100.00,
-            currentSpent: 45.00,
-            transactions: [
-                { name: "Movie Tickets", amount: -15.00, date: "10 Sep 2024" },
-                { name: "Concert", amount: -30.00, date: "5 Sep 2024" }
-            ],
-            barColor: "bg-red"
-        },
-        {
-            id: 2,
-            name: "Groceries",
-            spendingLimit: 200.00,
-            currentSpent: 120.00,
-            transactions: [
-                { name: "Supermarket", amount: -50.00, date: "12 Sep 2024" },
-                { name: "Farmers Market", amount: -70.00, date: "8 Sep 2024" }
-            ],
-            barColor: "bg-green"
-        },
-        {
-            id: 3,
-            name: "Utilities",
-            spendingLimit: 150.00,
-            currentSpent: 90.00,
-            transactions: [
-                { name: "Electricity Bill", amount: -60.00, date: "1 Sep 2024" },
-                { name: "Water Bill", amount: -30.00, date: "3 Sep 2024" }
-            ],
-            barColor: "bg-yellow"
-        }
-    ];
+    const [budgets, setBudgets] = useState([]);
+
+
+    const fetchBudgets = async () => {
+        const data = await getBudgets();
+        setBudgets(data);
+        console.log(budgets)
+    };
+
+
+    useEffect(() => {
+        fetchBudgets();
+    }, []);
+
 
     return (
         <div className={"px-4 pt-6 pb-28 min-h-screen bg-beige200 flex flex-col gap-8 md:px-10 lg:pl-72 lg:pb-6"}>
@@ -53,26 +33,26 @@ const Budgets = () => {
                 }}>
                     + Add New Budget
                 </button>
-                <BudgetsModal isOpen={isOpenEdit} setIsOpen={setIsOpenEdit} initialData={editingBudget} />
+                <BudgetsModal isOpen={isOpenEdit} setIsOpen={setIsOpenEdit} initialData={editingBudget}
+                              fetchBudgets={fetchBudgets}/>
             </div>
 
             <section className={"flex flex-col lg:grid lg:grid-cols-12 gap-6"}>
                 <div className={"lg:col-span-5"}>
-                    <MultiSegmentDonutBudgets />
+                    <MultiSegmentDonutBudgets segments={budgets}/>
                 </div>
 
                 <div className={"lg:col-span-7 flex flex-col gap-4"}>
-                    {mockData.map((budget) =>
-                    <SpendingTracker
-                        key={budget.id}
-                        name={budget.name}
-                        spendingLimit={budget.spendingLimit}
-                        currentSpent={budget.currentSpent}
-                        transactions={budget.transactions}
-                        barColor={budget.barColor}
-                        setEditingBudget={setEditingBudget}
-                        setIsOpenEdit={setIsOpenEdit}
-                    />
+                    {budgets.map((budget) =>
+                        <SpendingTracker
+                            key={budget.id}
+                            budgetData={budget}
+                            fetchBudgets={fetchBudgets}
+                            // transactions={budget.transactions}
+                            barColor={"bg-red"}
+                            setEditingBudget={setEditingBudget}
+                            setIsOpenEdit={setIsOpenEdit}
+                        />
                     )}
                 </div>
             </section>

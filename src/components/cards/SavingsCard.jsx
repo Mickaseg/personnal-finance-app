@@ -70,7 +70,8 @@ const SavingsCard = ({potData, barColor, setEditingPot, setIsOpen, fetchPots}) =
                         </button>
                     </ActionDropdown>
 
-                    <DeleteModal isOpen={isOpenDelete} setIsOpen={setIsOpenDelete} element={potData.name} elementId={potData.id} handleDelete={handleDeletePot}/>
+                    <DeleteModal isOpen={isOpenDelete} setIsOpen={setIsOpenDelete} element={potData.name}
+                                 elementId={potData.id} handleDelete={handleDeletePot}/>
 
                 </CardTitle>
             </CardHeader>

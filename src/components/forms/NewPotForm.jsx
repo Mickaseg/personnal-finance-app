@@ -47,12 +47,6 @@ const NewPotForm = ({initialData, isEditMode, setIsOpen, fetchPots, onError}) =>
             // Attempt to create pot
             await createPot(formData);
 
-            // if (!response.ok) {
-            //     const errorData = await response.json();
-            //     onError(errorData.message || "Failed to create pot");
-            //     return;
-            // }
-
             // Success path
             await fetchPots();
             setIsOpen(false);

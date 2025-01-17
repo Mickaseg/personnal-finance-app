@@ -4,7 +4,7 @@ import SavingsCard from "@/components/cards/SavingsCard.jsx";
 
 import {getPots} from "@/api/PotsRequests.jsx";
 
-
+// TODO : Add colors to pots
 const Pots = () => {
     const [isOpenEdit, setIsOpenEdit] = useState(false);
     const [editingPot, setEditingPot] = useState(null);
@@ -35,7 +35,8 @@ const Pots = () => {
                         className={"text-preset4 font-bold p-4 bg-grey900 text-white rounded-xl"}>
                     + Add New Pot
                 </button>
-                <PotsModal isOpen={isOpenEdit} setIsOpen={setIsOpenEdit} initialData={editingPot} fetchPots={fetchPots}/>
+                <PotsModal isOpen={isOpenEdit} setIsOpen={setIsOpenEdit} initialData={editingPot}
+                           fetchPots={fetchPots}/>
             </div>
 
             {/*SAVINGS*/}
