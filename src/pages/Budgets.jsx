@@ -9,14 +9,12 @@ const Budgets = () => {
     const [editingBudget, setEditingBudget] = useState(null);
 
     const [budgets, setBudgets] = useState([]);
-
-
+    
     const fetchBudgets = async () => {
         const data = await getBudgets();
         setBudgets(data);
         console.log(budgets)
     };
-
 
     useEffect(() => {
         fetchBudgets();

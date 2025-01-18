@@ -8,20 +8,15 @@ import PotsIcon from "../assets/images/icon-pot.svg";
 import Avatar from "../assets/images/avatars/rina-sato.jpg";
 import {getBalance, updateBalance} from "@/api/BalanceRequests.jsx";
 import {getPots, getTotalSavings} from "@/api/PotsRequests.jsx";
+import {getBudgets} from "@/api/BudgetsRequests.jsx";
 
 
 const Overview = () => {
     const [balance, setBalance] = useState([]);
     const [savings, setSavings] = useState();
     const [pots, setPots] = useState([]);
-
-    const data = [
-        {title: 'Bills', value: '$1,250', colorLegend: 'border-red'},
-        {title: 'Transport', value: '$250', colorLegend: 'border-blue'},
-        {title: 'Food', value: '$500', colorLegend: 'border-green'},
-        {title: 'Entertainment', value: '$100', colorLegend: 'border-yellow'},
-    ];
-
+    const [budgets, setBudgets] = useState([]);
+    
     useEffect(() => {
 
         getBalance().then((response) => {
@@ -34,6 +29,10 @@ const Overview = () => {
 
         getPots().then((response) => {
             setPots(response)
+        })
+
+        getBudgets().then((response) => {
+            setBudgets(response)
         })
 
     }, []);
@@ -177,8 +176,7 @@ const Overview = () => {
                     </div>
 
 
-                    <MultiSegmentDonut/>
-
+                    <MultiSegmentDonut segments={budgets}/>
 
                 </section>
 

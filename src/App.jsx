@@ -1,5 +1,6 @@
 import './App.css';
 import {BrowserRouter as Router, Outlet, Route, Routes} from 'react-router-dom';
+import {Toaster} from "@/components/ui/toaster";
 
 import Navbar from './components/nav/Navbar';
 import Overview from './pages/Overview';
@@ -16,6 +17,7 @@ function DashboardLayout() {
         <>
             <Navbar/>
             <Outlet/>
+            <Toaster/>
         </>
     );
 }

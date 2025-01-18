@@ -2,9 +2,10 @@ import {useState, useEffect} from "react";
 import ModalSelect from "@/components/inputs/ModalSelect.jsx";
 import ModalInput from "@/components/inputs/ModalInput.jsx";
 import {createPot} from "@/api/PotsRequests.jsx";
+import {useToast} from "@/hooks/use-toast.ts";
 
 const NewPotForm = ({initialData, isEditMode, setIsOpen, fetchPots, onError}) => {
-
+    const {toast} = useToast();
     const [formData, setFormData] = useState({
         name: '',
         target: '',
@@ -44,8 +45,16 @@ const NewPotForm = ({initialData, isEditMode, setIsOpen, fetchPots, onError}) =>
                 return;
             }
 
+
             // Attempt to create pot
             await createPot(formData);
+
+            // Show success toast
+            toast({
+                description: isEditMode ? "Pot updated successfully!" : "Pot created successfully!",
+                className: "bg-green border-green text-white",
+                duration: 3000,
+            });
 
             // Success path
             await fetchPots();

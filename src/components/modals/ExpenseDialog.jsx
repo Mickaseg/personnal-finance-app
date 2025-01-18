@@ -3,13 +3,13 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import Modal from "@/components/modals/Modal.jsx";
 
-const SavingsDialog = ({
+const ExpenseDialog = ({
                            isOpen,
                            onClose,
                            title,
+                           type,
                            currentAmount,
                            targetAmount,
-                           type,
                            onConfirm,
                            barColor
                        }) => {
@@ -21,9 +21,7 @@ const SavingsDialog = ({
         const inputAmount = Number(amount) || 0;
         const baseAmount = Number(currentAmount) || 0;
 
-        const calculatedAmount = type === 'withdraw'
-            ? baseAmount - inputAmount
-            : baseAmount + inputAmount;
+        const calculatedAmount = baseAmount + inputAmount;
 
         const calculatedPercentage = (calculatedAmount / targetAmount) * 100;
 
@@ -49,14 +47,14 @@ const SavingsDialog = ({
         <Modal
             isOpen={isOpen}
             onClose={handleClose}
-            title={type === 'withdraw' ? `Withdraw from '${title}'` : `Add to '${title}'`}
+            title={`Add an expense to ${title}`}
             footer={
                 <Button
                     type="submit"
                     className="w-full bg-grey900 text-white hover:bg-gray-800 py-6"
                     onClick={handleSubmit}
                 >
-                    {type === 'withdraw' ? 'Confirm Withdrawal' : 'Confirm Addition'}
+                    Add expense
                 </Button>
             }
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
@@ -91,7 +89,7 @@ const SavingsDialog = ({
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-2">
                         <label className="text-sm text-gray-600">
-                            {type === 'withdraw' ? 'Amount to Withdraw' : 'Amount to Add'}
+                            Amount of the expense to add
                         </label>
                         <div className="relative">
                             <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">$</span>
@@ -100,12 +98,8 @@ const SavingsDialog = ({
                                 value={amount}
                                 onChange={(e) => {
                                     const value = e.target.value;
-                                    if (type === 'withdraw' && Number(value) > currentAmount) {
-                                        return;
-                                    }
                                     setAmount(value);
                                 }}
-                                max={type === 'withdraw' ? currentAmount : undefined}
                                 className="pl-7"
                                 placeholder="0.00"
                             />
@@ -117,4 +111,4 @@ const SavingsDialog = ({
     );
 };
 
-export default SavingsDialog;
+export default ExpenseDialog;

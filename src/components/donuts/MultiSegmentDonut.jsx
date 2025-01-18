@@ -1,32 +1,40 @@
-import React from 'react';
 import {Card, CardContent} from "@/components/ui/card.tsx";
 import ExpensesLegend from "../cards/ExpensesLegend";
+import {useState, useEffect} from "react";
+import {getSummary} from "@/api/BudgetsRequests.jsx";
 
-const MultiSegmentDonut = ({
-                               segments = [
-                                   { title: 'Bills',value: 100, color: 'bg-red stroke-red', colorLegend:'border-red' },
-                                   { title: 'Transport',value: 150, color: 'bg-blue stroke-blue', colorLegend:'border-blue'},
-                                   { title: 'Food',value: 100, color: 'bg-green stroke-green', colorLegend:'border-green'},
-                                   { title: 'Food',value: 100, color: 'bg-green stroke-green', colorLegend:'border-green'}
-                               ],
-                               limit = 975
-                           }) => {
+const MultiSegmentDonut = ({segments}) => {
+    const [summary, setSummary] = useState([])
+
+
+    const fetchSummary = async () => {
+        const data = await getSummary();
+        setSummary(data);
+        console.log("fetching budgets")
+    };
+
+    useEffect(() => {
+        fetchSummary()
+    }, []);
+
+    const limit = summary.totalMax
+
     const size = 200;
     const strokeWidth = 20;
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
 
     // Calculate total of all segments
-    const total = segments.reduce((sum, segment) => sum + segment.value, 0);
+    const total = segments.reduce((sum, segment) => sum + segment.spent, 0);
 
     // Calculate starting point for each segment
     let currentOffset = 0;
     const segmentArcs = segments.map(segment => {
-        const percentage = (segment.value / limit) * 100;
+        const percentage = (segment.spent / limit) * 100;
         const arc = {
             offset: currentOffset,
             dashArray: `${(percentage * circumference) / 100} ${circumference}`,
-            color: segment.color
+            color: 'bg-red stroke-red'
         };
         currentOffset += (percentage * circumference) / 100;
         return arc;
@@ -41,8 +49,8 @@ const MultiSegmentDonut = ({
                     <svg width={size} height={size} className="transform -rotate-90">
                         {/* Background circle */}
                         <circle
-                            cx={size/2}
-                            cy={size/2}
+                            cx={size / 2}
+                            cy={size / 2}
                             r={radius}
                             className="stroke-gray-100"
                             strokeWidth={strokeWidth}
@@ -53,8 +61,8 @@ const MultiSegmentDonut = ({
                         {segmentArcs.map((arc, index) => (
                             <circle
                                 key={index}
-                                cx={size/2}
-                                cy={size/2}
+                                cx={size / 2}
+                                cy={size / 2}
                                 r={radius}
                                 className={arc.color}
                                 strokeWidth={strokeWidth}
@@ -77,7 +85,7 @@ const MultiSegmentDonut = ({
                 </div>
 
                 <div className="mt-4 space-y-2 md:justify-self-end md:mt-0 md:col-span-2">
-                <ExpensesLegend segments={segments} style={"md:flex md:flex-col"}/>
+                    <ExpensesLegend segments={segments} style={"md:flex md:flex-col"}/>
                 </div>
 
             </CardContent>

@@ -5,7 +5,7 @@ export const getBudgets = async () => {
         const response = await axiosInstance.get('/budgets');
         return response.data;
     } catch (error) {
-        console.error('Error getting transactions:', error);
+        console.error('Error getting budgets:', error);
         throw error;
     }
 };
@@ -15,7 +15,7 @@ export const createBudget = async (budget) => {
         const response = await axiosInstance.post('/budgets', budget);
         return response.data;
     } catch (error) {
-        console.error('Error creating pot:', error);
+        console.error('Error creating budget:', error);
         throw error;
     }
 }
@@ -25,7 +25,17 @@ export const deleteBudget = async (id) => {
         const response = await axiosInstance.delete(`/budgets/${id}`);
         return response.data;
     } catch (error) {
-        console.error('Error deleting pot:', error);
+        console.error('Error deleting budget:', error);
+        throw error;
+    }
+}
+
+export const editBudgetMax = async (id, amount) => {
+    try {
+        const response = await axiosInstance.patch(`/budgets/${id}`, {max: amount});
+        return response.data;
+    } catch (error) {
+        console.error('Error updating max amount', error);
         throw error;
     }
 }
@@ -40,13 +50,13 @@ export const getSummary = async () => {
     }
 }
 
-// TODO : handle adding money spent to budget
-// export const addToBudget = async (id, amount) => {
-//     try {
-//         const response = await axiosInstance.patch(`/budgets/${id}`, {current: amount});
-//         return response.data;
-//     } catch (error) {
-//         console.error('Error adding to pot:', error);
-//         throw error;
-//     }
-// }
+// TODO : handle transactions
+export const addToBudget = async (id, amount) => {
+    try {
+        const response = await axiosInstance.patch(`/budgets/${id}`, {spent: amount});
+        return response.data;
+    } catch (error) {
+        console.error('Error adding to pot:', error);
+        throw error;
+    }
+}

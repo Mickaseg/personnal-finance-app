@@ -6,12 +6,14 @@ import ActionDropdown from "@/components/nav/ActionDropdown.jsx";
 import DeleteModal from "@/components/modals/DeleteModal.jsx";
 import SavingsDialog from "@/components/modals/SavingsDialog.jsx";
 import {deletePot, withdrawFromPot, addToPot} from "@/api/PotsRequests.jsx";
+import {useToast} from "@/hooks/use-toast.ts";
 
 
 const SavingsCard = ({potData, barColor, setEditingPot, setIsOpen, fetchPots}) => {
     const [isOpenDelete, setIsOpenDelete] = useState(false);
     const [isWithdrawOpen, setIsWithdrawOpen] = useState(false);
     const [isAddOpen, setIsAddOpen] = useState(false);
+    const {toast} = useToast()
 
     // const {id, name, savedAmount, targetAmount, barColor} = potData;
     const progressPercentage = (potData.current / potData.target) * 100;
@@ -33,12 +35,20 @@ const SavingsCard = ({potData, barColor, setEditingPot, setIsOpen, fetchPots}) =
         {
             label: "Delete Pot",
             onClick: handleDelete,
-            className: "text-red-600",
+            className: "text-red",
         },
     ];
 
     const handleDeletePot = async () => {
         await deletePot(potData._id);
+
+        // Show success toast
+        toast({
+            description: "Pot deleted successfully !",
+            className: "bg-green border-green",
+            duration: 3000,
+        });
+
         fetchPots();
         setIsOpenDelete(false);
     }
@@ -46,12 +56,28 @@ const SavingsCard = ({potData, barColor, setEditingPot, setIsOpen, fetchPots}) =
     const handleWithdraw = async (amount) => {
         console.log(amount)
         await withdrawFromPot(potData._id, amount);
+
+        // Show success toast
+        toast({
+            description: "Withdraw successful !",
+            className: "bg-green border-green",
+            duration: 3000,
+        });
+
         fetchPots();
     }
 
     const handleAdd = async (amount) => {
         console.log(amount)
         await addToPot(potData._id, amount);
+
+        // Show success toast
+        toast({
+            description: "Successfully added to pot!!",
+            className: "bg-green border-green",
+            duration: 3000,
+        });
+
         fetchPots();
     }
 

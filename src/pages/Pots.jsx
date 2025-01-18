@@ -57,6 +57,7 @@ const Pots = () => {
                             fetchPots={fetchPots}
                         />
                     ))}
+                    
                 </div>
             )}
         </div>

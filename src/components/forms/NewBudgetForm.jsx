@@ -1,9 +1,11 @@
 import {useState, useEffect} from "react";
 import ModalSelect from "@/components/inputs/ModalSelect.jsx";
 import ModalInput from "@/components/inputs/ModalInput.jsx";
-import {createBudget} from "@/api/BudgetsRequests.jsx";
+import {createBudget, editBudgetMax} from "@/api/BudgetsRequests.jsx";
+import {useToast} from "@/hooks/use-toast.ts";
 
 const NewBudgetForm = ({initialData, isEditMode, setIsOpen, fetchBudgets, onError}) => {
+    const {toast} = useToast()
     const [formData, setFormData] = useState({
         name: '',
         max: '',
@@ -44,9 +46,18 @@ const NewBudgetForm = ({initialData, isEditMode, setIsOpen, fetchBudgets, onErro
             if (!validateForm()) {
                 return;
             }
+            if (!isEditMode) {
+                await createBudget(formData);
+            } else {
+                await editBudgetMax(initialData._id, formData.max)
+            }
 
-            // Attempt to create pot
-            await createBudget(formData);
+            // Show success toast
+            toast({
+                description: isEditMode ? "Pot updated successfully!" : "Pot created successfully!",
+                className: "bg-green border-black text-white",
+                duration: 3000,
+            });
 
             // Success path
             await fetchBudgets();

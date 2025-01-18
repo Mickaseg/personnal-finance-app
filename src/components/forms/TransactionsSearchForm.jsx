@@ -74,7 +74,7 @@ const TransactionsSearchForm = ({transactions, setTransactions, originalTransact
 
     console.log(categories)
     return (
-        <form className={"flex justify-evenly items-center lg:justify-between"}>
+        <form className={"flex justify-evenly items-center lg:justify-between"} onSubmit={ev => ev.preventDefault()}>
             <div className={"flex border-2 border-grey300 px-3 py-3 rounded-xl items-center"}>
 
                 <label className={"hidden"}>Search transaction</label>

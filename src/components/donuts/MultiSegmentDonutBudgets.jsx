@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Card, CardContent} from "@/components/ui/card.tsx";
 import {getSummary} from "@/api/BudgetsRequests.jsx"
 
-
+// TODO : Use colors in Donut
 const MultiSegmentDonutBudgets = ({segments}) => {
     const [summary, setSummary] = useState([])
 
@@ -30,11 +30,11 @@ const MultiSegmentDonutBudgets = ({segments}) => {
     // Calculate starting point for each segment
     let currentOffset = 0;
     const segmentArcs = segments.map(segment => {
-        const percentage = (segment.value / limit) * 100;
+        const percentage = (segment.spent / limit) * 100;
         const arc = {
             offset: currentOffset,
             dashArray: `${(percentage * circumference) / 100} ${circumference}`,
-            color: segment.color
+            color: 'bg-red stroke-red'
         };
         currentOffset += (percentage * circumference) / 100;
         return arc;

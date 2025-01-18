@@ -16,6 +16,7 @@ const BudgetsModal = ({isOpen, setIsOpen, initialData = null, fetchBudgets}) => 
         }
     }, [isOpen]);
 
+
     return (
         <Modal
             isOpen={isOpen}
@@ -25,21 +26,7 @@ const BudgetsModal = ({isOpen, setIsOpen, initialData = null, fetchBudgets}) => 
                 isEditMode
                     ? "Update your budget details and spending limits."
                     : "Create a budget to manage your spending effectively."
-            }
-            // footer={
-            //     <div className={"w-full flex justify-center"}>
-            //         <button
-            //             className="w-full bg-grey900 text-white py-4 rounded-xl text-preset4 font-bold"
-            //             onClick={() => {
-            //                 // Handle form submission
-            //                 setIsOpen(false);
-            //             }}
-            //         >
-            //             {isEditMode ? "Save Changes" : "Add Budget"}
-            //         </button>
-            //     </div>
-            // }
-        >
+            }>
             {error && <ModalAlert message={error}/>}
             <NewBudgetForm initialData={initialData} setIsOpen={setIsOpen} isEditMode={isEditMode}
                            fetchBudgets={fetchBudgets}
