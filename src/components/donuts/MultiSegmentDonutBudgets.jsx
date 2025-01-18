@@ -86,8 +86,9 @@ const MultiSegmentDonutBudgets = ({segments}) => {
                 </div>
             </CardContent>
 
-            <div className={"w-64"}>
-                <h2 className={"text-preset2 text-grey900 font-bold pb-4"}>Spending Summary</h2>
+            <div className={"w-full"}>
+                <h2 className={"text-preset2 text-grey900 font-bold pb-4 flex justify-center"}>Spending
+                    Summary</h2>
                 <ul className={`flex flex-col gap-3`}>
                     {segments && segments.map((item) => {
                         return (
