@@ -10,13 +10,14 @@ const MultiSegmentDonutBudgets = ({segments}) => {
     const fetchSummary = async () => {
         const data = await getSummary();
         setSummary(data);
-        console.log("fetching budgets")
+
     };
 
     useEffect(() => {
         fetchSummary()
     }, []);
 
+    console.log(segments)
     const limit = summary.totalMax
 
     const size = 200;
@@ -34,9 +35,10 @@ const MultiSegmentDonutBudgets = ({segments}) => {
         const arc = {
             offset: currentOffset,
             dashArray: `${(percentage * circumference) / 100} ${circumference}`,
-            color: 'bg-red stroke-red'
+            color: `stroke-red`
         };
         currentOffset += (percentage * circumference) / 100;
+        console.log(typeof (segment.color))
         return arc;
     });
 

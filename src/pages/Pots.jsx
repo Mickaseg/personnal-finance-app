@@ -49,15 +49,15 @@ const Pots = () => {
 
                     {pots && pots.map((pot) => (
                         <SavingsCard
-                            key={pot.id}
+                            key={pot._id}
                             potData={pot}
-                            barColor={"bg-green"}
+                            barColor={`bg-${pot.color}`}
                             setEditingPot={setEditingPot}
                             setIsOpen={setIsOpenEdit}
                             fetchPots={fetchPots}
                         />
                     ))}
-                    
+
                 </div>
             )}
         </div>

@@ -34,7 +34,7 @@ const MultiSegmentDonut = ({segments}) => {
         const arc = {
             offset: currentOffset,
             dashArray: `${(percentage * circumference) / 100} ${circumference}`,
-            color: 'bg-red stroke-red'
+            color: `stroke-red`
         };
         currentOffset += (percentage * circumference) / 100;
         return arc;

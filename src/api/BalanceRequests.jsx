@@ -1,4 +1,4 @@
-import { axiosInstance } from './AxiosConfig.jsx';
+import {axiosInstance} from './AxiosConfig.jsx';
 
 export const getBalance = async () => {
     try {
@@ -10,14 +10,9 @@ export const getBalance = async () => {
     }
 };
 
-export const updateBalance = async () => {
-    const data = {
-        "current": 2500,
-        "income": 2000.25,
-        "expenses": 1000.5,
-    }
+export const updateBalance = async (id, data) => {
     try {
-        const response = await axiosInstance.patch(`/balance/6723bab619e9292d5d470fae`, data);
+        const response = await axiosInstance.patch(`/balance/${id}`, data);
         return response.data;
     } catch (error) {
         console.error('Error updating balance:', error);

@@ -9,18 +9,17 @@ const Budgets = () => {
     const [editingBudget, setEditingBudget] = useState(null);
 
     const [budgets, setBudgets] = useState([]);
-    
+
     const fetchBudgets = async () => {
         const data = await getBudgets();
         setBudgets(data);
-        console.log(budgets)
     };
 
     useEffect(() => {
         fetchBudgets();
     }, []);
 
-
+    console.log(budgets)
     return (
         <div className={"px-4 pt-6 pb-28 min-h-screen bg-beige200 flex flex-col gap-8 md:px-10 lg:pl-72 lg:pb-6"}>
             <div className={"flex justify-between"}>

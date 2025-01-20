@@ -6,9 +6,11 @@ import MultiSegmentDonut from "../components/donuts/MultiSegmentDonut.jsx";
 import CaretRight from "../assets/images/icon-caret-right.svg";
 import PotsIcon from "../assets/images/icon-pot.svg";
 import Avatar from "../assets/images/avatars/rina-sato.jpg";
-import {getBalance, updateBalance} from "@/api/BalanceRequests.jsx";
+import {getBalance} from "@/api/BalanceRequests.jsx";
 import {getPots, getTotalSavings} from "@/api/PotsRequests.jsx";
 import {getBudgets} from "@/api/BudgetsRequests.jsx";
+import BalanceModal from "@/components/modals/BalanceModal.jsx";
+import ExpenseDialog from "@/components/modals/ExpenseDialog.jsx";
 
 
 const Overview = () => {
@@ -16,12 +18,17 @@ const Overview = () => {
     const [savings, setSavings] = useState();
     const [pots, setPots] = useState([]);
     const [budgets, setBudgets] = useState([]);
-    
+    const [openBalanceEdit, setOpenBalanceEdit] = useState(false)
+    const [editingBalance, setEditingBalance] = useState(null);
+
+    const fetchBalance = async () => {
+        const data = await getBalance();
+        setBalance(data[0]);
+    };
+
     useEffect(() => {
 
-        getBalance().then((response) => {
-            setBalance(response[0]);
-        })
+        fetchBalance()
 
         getTotalSavings().then((response) => {
             setSavings(response.totalBalance)
@@ -41,8 +48,21 @@ const Overview = () => {
 
     return (
         <div className={"px-4 pt-6 pb-28 min-h-screen bg-beige200 flex flex-col gap-8 md:px-10 lg:pl-72 lg:pb-6"}>
+            <div className={"flex justify-between"}>
+                <h1 className={"text-preset1 text-grey900 font-bold"}>Overview</h1>
+                <button className={"text-preset4 font-bold p-4 bg-grey900 text-white rounded-xl"} onClick={() => {
+                    setOpenBalanceEdit(true);
+                    setEditingBalance(null);
+                }}>
+                    Set Balance
+                </button>
+                <BalanceModal
+                    isOpen={openBalanceEdit}
+                    setIsOpen={setOpenBalanceEdit}
+                    initialData={balance[0]}
+                />
+            </div>
 
-            <h1 className={"text-preset1 text-grey900 font-bold"}>Overview</h1>
             {/*// TODO : Grid for desktop*/}
             {/*BALANCE*/}
             <section className={"flex flex-col gap-3 md:flex-row md:gap-6"}>
@@ -52,11 +72,11 @@ const Overview = () => {
                 </div>
                 <div className={'p-5 bg-white rounded-xl md:w-1/3'}>
                     <p className={'text-preset4'}>Income</p>
-                    <p className={"text-preset1 font-bold"}>${balance.income}</p>
+                    <p className={"text-preset1 font-bold text-green"}>+${balance.income}</p>
                 </div>
                 <div className={'p-5 bg-white rounded-xl md:w-1/3'}>
                     <p className={'text-preset4'}>Expenses</p>
-                    <p className={"text-preset1 font-bold"}>${balance.expenses}</p>
+                    <p className={"text-preset1 font-bold text-red"}>-${balance.expenses}</p>
                 </div>
             </section>
 

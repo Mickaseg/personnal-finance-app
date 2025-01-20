@@ -34,7 +34,7 @@ const SpendingTracker = ({
         {
             label: "Delete Budget",
             onClick: () => setIsOpenDelete(true),
-            className: "text-red-600",
+            className: "text-red",
         },
     ];
 
@@ -63,7 +63,7 @@ const SpendingTracker = ({
             <CardHeader className="space-y-1">
                 <CardTitle className="text-md flex items-center justify-between">
                     <div className="flex items-center gap-2 text-preset2">
-                        <div className="w-4 h-4 rounded-full bg-teal-500"></div>
+                        <div className={`w-4 h-4 rounded-full bg-${budgetData.color}`}></div>
                         {budgetData.name}
                     </div>
                     <ActionDropdown items={menuItems}>
@@ -80,7 +80,7 @@ const SpendingTracker = ({
 
             <CardContent className="space-y-4">
                 {/* Progress Bar */}
-                <Progress value={(budgetData.spent / budgetData.max) * 100} color={barColor}
+                <Progress value={(budgetData.spent / budgetData.max) * 100} color={`bg-${budgetData.color}`}
                           className="h-6 rounded-sm p-0.5"/>
 
                 {/* Spending Stats */}

@@ -3,20 +3,24 @@ import ModalSelect from "@/components/inputs/ModalSelect.jsx";
 import ModalInput from "@/components/inputs/ModalInput.jsx";
 import {createPot} from "@/api/PotsRequests.jsx";
 import {useToast} from "@/hooks/use-toast.ts";
+import {BUDGET_COLORS} from "@/constants/colors.js";
 
 const NewPotForm = ({initialData, isEditMode, setIsOpen, fetchPots, onError}) => {
     const {toast} = useToast();
     const [formData, setFormData] = useState({
         name: '',
-        target: '',
+        target: 0,
+        current: 0,
+        color: BUDGET_COLORS[0],
         user: "6727c16febe0f7a54c3a3111"
     });
 
     useEffect(() => {
         if (initialData) {
             setFormData({
-                name: initialData.name || '',
-                target: initialData.targetAmount || '',
+                name: initialData.name,
+                target: initialData.targetAmount,
+                color: initialData.color,
                 user: initialData.user || "6727c16febe0f7a54c3a3111"
             });
         }
@@ -64,9 +68,10 @@ const NewPotForm = ({initialData, isEditMode, setIsOpen, fetchPots, onError}) =>
             console.error("Pot creation error:", error);
         }
     };
-
+    console.log(formData)
     return (
         <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+
             <ModalInput
                 label="Pot Name"
                 placeholder="Travel to Germany"
@@ -99,8 +104,16 @@ const NewPotForm = ({initialData, isEditMode, setIsOpen, fetchPots, onError}) =>
             />
 
             <ModalSelect
-                options={["Green"]}
+                options={BUDGET_COLORS}
                 label="Theme"
+                className="capitalize"
+                value={formData.color}  // Add this to control the selected value
+                onChange={(e) => {
+                    setFormData(prev => ({
+                        ...prev,
+                        color: e.target.value
+                    }));
+                }}
             />
 
             <div className="w-full flex justify-center">
